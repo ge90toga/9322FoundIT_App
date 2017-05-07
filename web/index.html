@@ -1,44 +1,68 @@
 <!DOCTYPE html>
-<html lang="en-us" ng-app="weatherApp">
-    <head>
-        <title>AngularJS Weather Forecast SPA</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-        <meta charset="UTF-8">
+<html lang="en-us" ng-app="foundITApp">
+<head>
+    <title>Found IT</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta charset="UTF-8">
 
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <script src="lib/jquery.js"></script>
-        <script src="lib/bootstrap.min.js"></script>
-        <script src="lib/angular.min.js"></script>
-        <script src="lib/angular-route.min.js"></script>
-        <script src="lib/angular-resource.min.js"></script>
-        <script src="app.js"></script>
-        <script src="routes.js"></script>
-        <script src="services.js"></script>
-        <script src="controllers/controller.js"></script>
-        <script src="directives/directives.js"></script>
-    </head>
-    <body>
-        <header>
-			<nav class="navbar navbar-default">
-			<div class="container">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="/">AngularJS Weather</a>
-				</div>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#"><i class="fa fa-home"></i>Page1</a></li>
-                    <li><a href="#"><i class="fa fa-home"></i>Page2</a></li>
-                    <li><a href="#"><i class="fa fa-home"></i>Page3</a></li>
-                    <li><a href="#"><i class="fa fa-home"></i>Page4</a></li>
-                    <li><a href="#"><i class="fa fa-home"></i>Page5</a></li>
-				</ul>
-			</div>
-			</nav>
-		</header>
+    <script src="lib/jquery.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/angular-route.min.js"></script>
+    <script src="lib/angular-resource.min.js"></script>
+    <script src="app.js"></script>
+    <script src="routes/routes.js"></script>
+    <script src="services/services.js"></script>
+    <script src="controllers/controller.js"></script>
+    <script src="controllers/manger/manager.create.job.js"></script>
+    <script src="controllers/login/login.controller.js"></script>
+    <script src="controllers/register/register.controller.js"></script>
 
+    <script src="directives/directives.js"></script>
+
+
+
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-default">
         <div class="container">
-            <div ng-view></div>
-		</div>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#/">Found IT</a>
+            </div>
 
-    </body>
+            <!--show if login as manager-->
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#/manager/jobs/create"><i class="fa fa-home"></i>Create Jobs</a></li>
+                <li><a href="#/manager/jobs/myjob"><i class="fa fa-home"></i>Page2</a></li>
+                <li><a href="#/manager/polls"><i class="fa fa-home"></i>Page3</a></li>
+                <li><a href="#"><i class="fa fa-home"></i>Page4</a></li>
+                <li><a href="#/"><i class="fa fa-home"></i>Log Out</a></li>
+            </ul>
+            <!--&lt;!&ndash;show if login as reviewer&ndash;&gt;-->
+            <!--<ul class="nav navbar-nav navbar-right">-->
+                <!--<li><a href="#/manager/jobs/create"><i class="fa fa-home"></i>Create Jobs</a></li>-->
+                <!--<li><a href="#/manager/jobs/myjob"><i class="fa fa-home"></i>Page2</a></li>-->
+                <!--<li><a href="#/manager/polls"><i class="fa fa-home"></i>Page3</a></li>-->
+                <!--<li><a href="#"><i class="fa fa-home"></i>Page4</a></li>-->
+            <!--</ul>-->
+            <!--&lt;!&ndash;show if login as user&ndash;&gt;-->
+            <!--<ul class="nav navbar-nav navbar-right">-->
+                <!--<li><a href="#/manager/jobs/create"><i class="fa fa-home"></i>Create Jobs</a></li>-->
+                <!--<li><a href="#/manager/jobs/myjob"><i class="fa fa-home"></i>Page2</a></li>-->
+                <!--<li><a href="#/manager/polls"><i class="fa fa-home"></i>Page3</a></li>-->
+                <!--<li><a href="#"><i class="fa fa-home"></i>Page4</a></li>-->
+            <!--</ul>-->
+
+        </div>
+    </nav>
+</header>
+
+<div class="container">
+    <div ng-view></div>
+</div>
+
+</body>
 </html>

@@ -1,5 +1,5 @@
 // DIRECTIVES
-weatherApp.directive("weatherReport", function() {
+foundITApp.directive("weatherReport", function() {
    return {
        restrict: 'E',
        templateUrl: 'directives/weatherReport.html',

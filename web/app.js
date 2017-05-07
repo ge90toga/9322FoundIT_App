@@ -1,3 +1,8 @@
 // MODULE
-var weatherApp = angular.module('weatherApp', ['ngRoute', 'ngResource']);
+var foundITApp = angular.module('foundITApp',
+    [
+        'ngRoute',
+        'ngResource'
+    ]
+);
 

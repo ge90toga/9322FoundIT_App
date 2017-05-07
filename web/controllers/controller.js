@@ -1,5 +1,5 @@
 // CONTROLLERS
-weatherApp.controller('homeController', ['$scope', 'cityService', '$location', function ($scope, cityService,$location ) {
+foundITApp.controller('homeController', ['$scope', 'cityService', '$location', function ($scope, cityService, $location ) {
 
     $scope.city = cityService.city;
 
@@ -13,7 +13,7 @@ weatherApp.controller('homeController', ['$scope', 'cityService', '$location', f
 
 }]);
 
-weatherApp.controller('forecastController', ['$scope', '$resource', '$routeParams', 'cityService', function ($scope, $resource, $routeParams, cityService) {
+foundITApp.controller('forecastController', ['$scope', '$resource', '$routeParams', 'cityService', function ($scope, $resource, $routeParams, cityService) {
 
     $scope.city = cityService.city;
 
@@ -37,3 +37,4 @@ weatherApp.controller('forecastController', ['$scope', '$resource', '$routeParam
     };
 
 }]);
+
