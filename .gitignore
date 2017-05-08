@@ -1,4 +1,4 @@
 /bin/
 /target/
 .idea/
-demo.mv.db
+*.db
