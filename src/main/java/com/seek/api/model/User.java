@@ -25,19 +25,19 @@ public class User implements UserDetails {
     @NotNull
     @Size(min = 4, max = 30)
     @Pattern(regexp = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$")
-    private java.lang.String username;
+    private String username;
 
     @NotNull
     @Column(name = "password", length = 70)
-    private java.lang.String password;
+    private String password;
 
     @NotNull
     @Size(min = 4, max = 30)
-    private java.lang.String name;
+    private String name;
 
     @Override
     @JsonProperty("email")
-    public java.lang.String getUsername() {
+    public String getUsername() {
         return username;
     }
 
@@ -49,11 +49,11 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public void setUsername(java.lang.String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    public java.lang.String getName() {
+    public String getName() {
         return name;
     }
 
@@ -63,12 +63,12 @@ public class User implements UserDetails {
 
     @Override
     @JsonIgnore
-    public java.lang.String getPassword() {
+    public String getPassword() {
         return password;
     }
 
     @JsonProperty
-    public void setPassword(java.lang.String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -77,9 +77,9 @@ public class User implements UserDetails {
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> authorities = new ArrayList<>();
-        Role userRoles = this.getRole();
+        String userRoles = this.getRole();
         if(userRoles != null) {
-            SimpleGrantedAuthority authority = new SimpleGrantedAuthority(userRoles.getRolename());
+            SimpleGrantedAuthority authority = new SimpleGrantedAuthority(userRoles);
             authorities.add(authority);
         }
         return authorities;
@@ -110,12 +110,12 @@ public class User implements UserDetails {
     }
 
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "user_roles",
-            joinColumns        = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id",  referencedColumnName = "id")}
-    )
-    private Role role;
+//    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @JoinTable(name = "user_roles",
+//            joinColumns        = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+//            inverseJoinColumns = {@JoinColumn(name = "role_id",  referencedColumnName = "id")}
+//    )
+    private String role;
 
     @Override
     @JsonIgnore
@@ -130,23 +130,23 @@ public class User implements UserDetails {
             return Objects.equal(getId(), other.getId())
                     && Objects.equal(getUsername(), other.getUsername())
                     && Objects.equal(getPassword(), other.getPassword())
-                    && Objects.equal(getRole().getRolename(), other.getRole().getRolename())
+                    && Objects.equal(getRole(), other.getRole())
                     && Objects.equal(isEnabled(), other.isEnabled());
         }
         return false;
     }
 
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId(), getUsername(), getPassword(), getRole().getRolename(), isEnabled());
+        return Objects.hashCode(getId(), getUsername(), getPassword(), getRole(), isEnabled());
     }
 
 }
