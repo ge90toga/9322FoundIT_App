@@ -29,10 +29,10 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... arg0) throws Exception {
-        userService.createUser(new UserDTO("ruan.yuji@gmail.com", "123", "yuji", "ROLE_USER"));
-        userService.createUser(new UserDTO("test@gmail.com", "123", "test", "ROLE_USER"));
-        userService.createUser(new UserDTO("295046974@qq.com", "123", "frank", "ROLE_ADMIN"));
-        testJobs();
+//        userService.createUser(new UserDTO("ruan.yuji@gmail.com", "123", "yuji", "ROLE_USER"));
+//        userService.createUser(new UserDTO("test@gmail.com", "123", "test", "ROLE_USER"));
+//        userService.createUser(new UserDTO("295046974@qq.com", "123", "frank", "ROLE_ADMIN"));
+//        testJobs();
     }
 
     private void testJobs() {
