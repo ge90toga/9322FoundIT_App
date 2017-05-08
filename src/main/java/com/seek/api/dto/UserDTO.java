@@ -1,9 +1,8 @@
 package com.seek.api.dto;
 
 
-import com.seek.api.model.Role;
-import com.seek.api.model.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.seek.api.model.User;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,43 +15,43 @@ import java.util.Optional;
 
 public final class UserDTO {
 
-    private final java.lang.String role; // "ROLE_USER" "ROLE_ADMIN"
+    private final String role; // "ROLE_USER" "ROLE_ADMIN"
 
-    private final java.lang.String email;
+    private final String email;
     @Size(min = 8, max = 100)
-    private final java.lang.String password;
-    private final java.lang.String name;
+    private final String password;
+    private final String name;
 
-    public UserDTO(@JsonProperty("email") java.lang.String email,
-                   @JsonProperty("password") java.lang.String password,
-                   @JsonProperty("name") java.lang.String name,
-                   @JsonProperty("role") java.lang.String role) {
+    public UserDTO(@JsonProperty("email") String email,
+                   @JsonProperty("password") String password,
+                   @JsonProperty("name") String name,
+                   @JsonProperty("role") String role) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.role = role;
     }
 
-    public Optional<java.lang.String> getEmail() {
+    public Optional<String> getEmail() {
         return Optional.ofNullable(email);
     }
 
-    public Optional<java.lang.String> getEncodedPassword() {
+    public Optional<String> getEncodedPassword() {
         return Optional.ofNullable(password).map(p -> new BCryptPasswordEncoder().encode(p));
     }
 
-    public Optional<java.lang.String> getName() {
+    public Optional<String> getName() {
         return Optional.ofNullable(name);
     }
 
-    public java.lang.String getRole() {
+    public String getRole() {
         return role;
     }
 
     public User toUser() {
         User user = new User();
         user.setUsername(email);
-        user.setRole(new Role());
+        user.setRole("");
         user.setPassword(new BCryptPasswordEncoder().encode(password));
         user.setName(name);
         return user;

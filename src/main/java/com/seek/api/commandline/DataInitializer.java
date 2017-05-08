@@ -3,8 +3,10 @@ package com.seek.api.commandline;
 
 import java.util.*;
 
+import com.seek.api.dto.UserDTO;
+import com.seek.api.model.*;
+import com.seek.api.service.JobService;
 import com.seek.api.service.PostService;
-import com.seek.api.model.Post;
 import com.seek.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -22,13 +24,39 @@ import org.springframework.stereotype.Component;
     @Autowired
     UserService userService;
 
+    @Autowired
+    JobService jobService;
+
 	@Override
 	public void run(String... arg0) throws Exception {
-//        generatePosts().stream().forEach(p -> postService.save(p));
-//        userService.createUser(new UserDTO("ruan.yuji@gmail.com", "123", "yuji", "ROLE_USER"));
-//        userService.createUser(new UserDTO("test@gmail.com", "123", "test", "ROLE_USER"));
-//        userService.createUser(new UserDTO("295046974@qq.com", "123", "frank", "ROLE_ADMIN"));
+        userService.createUser(new UserDTO("ruan.yuji@gmail.com", "123", "yuji", "ROLE_USER"));
+        userService.createUser(new UserDTO("test@gmail.com", "123", "test", "ROLE_USER"));
+        userService.createUser(new UserDTO("295046974@qq.com", "123", "frank", "ROLE_ADMIN"));
+        testJobs();
 	}
+
+	private void testJobs() {
+//	    Job job = new Job("Frank1", "Java Dev", "full-time", "Google", "hello", JobStatus.OPEN);
+//        jobService.addJob(job);
+//        Job job0 = new Job("Frank1", "Java Dev", "full-time", "Google", "hello", JobStatus.OPEN);
+//        jobService.addJob(job0);
+        System.out.println("exist job: " + jobService.existJob(2L));
+        Job job1 = jobService.findJobByID(2L);
+        System.out.println(job1);
+        job1.setStatus(JobStatus.CLOSED);
+        jobService.updateJob(job1);
+        System.out.println(job1);
+        Application application = new Application("1", "1", "12xx@qq.com", "123123", ApplicationStatus.WAITING);
+        jobService.addApplication(application);
+        Review review = new Review("1", "1","1", "xiaomeimei", "hellllo", true);
+        jobService.addReview(review);
+	}
+
+	private List<Job> generateJobs() {
+	    List<Job> jobs = new ArrayList<>();
+
+	    return jobs;
+    }
 
     private List<Post> generatePosts() {
         List posts = new ArrayList();

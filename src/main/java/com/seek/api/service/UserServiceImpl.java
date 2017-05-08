@@ -1,10 +1,8 @@
 package com.seek.api.service;
 
 
-import com.seek.api.model.User;
 import com.seek.api.dto.UserDTO;
-import com.seek.api.model.Role;
-import com.seek.api.repository.RoleRepository;
+import com.seek.api.model.User;
 import com.seek.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
@@ -12,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,12 +17,10 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService  {
 
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository){
+    public UserServiceImpl(UserRepository userRepository){
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
     }
 
     @Override
@@ -52,13 +47,8 @@ public class UserServiceImpl implements UserService  {
 
     @Override
     public List<User> findAllAdmin() {
-        List<User> result = new ArrayList<>();
-        List<Role> tmp = roleRepository.findByRolename("ROLE_ADMIN");
-        System.err.println("roles:" + tmp.get(0)); // TODO  have error.
-        for (Role role : tmp) {
-            result.addAll(role.getUserRoles());
-        }
-        return result;
+        List<User> users = userRepository.findByRole("ROLE_ADMIN");
+        return users;
     }
 
     @Override
@@ -75,14 +65,16 @@ public class UserServiceImpl implements UserService  {
 
     private User toUserRole(UserDTO userDTO) {
         User user = userDTO.toUser();
-        Role role = new Role();
+//        Role role = new Role();
         if (userDTO == null || userDTO.equals("")) {
-            role.setRolename("ROLE_USER");
+            user.setRole("ROLE_USER");
+//            role.setRolename("ROLE_USER");
         } else {
-            role.setRolename(userDTO.getRole());
+            user.setRole(userDTO.getRole());
+//            role.setRolename(userDTO.getRole());
         }
 
-        user.setRole(role);
+//        user.setRole(role);
         return user;
     }
 

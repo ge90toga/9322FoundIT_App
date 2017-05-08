@@ -14,13 +14,13 @@ public class Comment implements Serializable {
     private Long id;
 
     @Column(name = "author")
-    private Role author;
+    private String author;
 
     @Column(name = "review")
-    private Role review;
+    private String review;
 
     @Column(name = "date")
-    private Role date;
+    private String date;
 
     @Column(name = "post_id")
     private Long postId;
@@ -28,7 +28,7 @@ public class Comment implements Serializable {
     public Comment() {
     }
 
-    public Comment(Role author, Role review, Role date) {
+    public Comment(String author, String review, String date) {
         this.author = author;
         this.review = review;
         this.date = date;
@@ -42,27 +42,27 @@ public class Comment implements Serializable {
         this.id = id;
     }
 
-    public Role getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(Role author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 
-    public Role getReview() {
+    public String getReview() {
         return review;
     }
 
-    public void setReview(Role review) {
+    public void setReview(String review) {
         this.review = review;
     }
 
-    public Role getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Role date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
