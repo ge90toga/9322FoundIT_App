@@ -26,7 +26,7 @@ import org.springframework.stereotype.Component;
 	public void run(String... arg0) throws Exception {
 //        generatePosts().stream().forEach(p -> postService.save(p));
 //        userService.createUser(new UserDTO("ruan.yuji@gmail.com", "123", "yuji", "ROLE_USER"));
-//        userService.createUser(new UserDTO("test@gmail.com", "123", "test", "ROLE_USER"));
+//        userService.createUser(new UserDTO("mock@gmail.com", "123", "mock", "ROLE_USER"));
 //        userService.createUser(new UserDTO("295046974@qq.com", "123", "frank", "ROLE_ADMIN"));
 	}
 

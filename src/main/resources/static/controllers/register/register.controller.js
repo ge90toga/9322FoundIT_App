@@ -1,28 +1,39 @@
-foundITApp.controller('registerController', function ($scope, $location) {
+foundITApp.controller('registerController', function ($scope, $location, authService, toaster, $timeout) {
     $scope.init = function () {
         $scope.data = {
             form: {
-                username: '',
-                pwd: '',
-                type: ''
+                name: '',
+                password: '',
+                role: '',
+                type: '',
+                email: ''
             },
-            loginTypes: ['Job Seeker', 'Manager', 'Reviewer']
+            loginTypes: ['Job Seeker', 'Manager', 'Reviewer'],
+            roleMap: {
+                'Job Seeker': 'ROLE_USER',
+                'Manager': 'ROLE_ADMIN',
+                'Reviewer': 'ROLE_ADMIN'
+            }
         };
         $scope.data.form.type = $scope.data.loginTypes[0];
 
         $scope.submit = function () {
-            console.log('loginController::submit! data:', $scope.data.form);
-            if($scope.data.form.type === 'Manager'){
-                $location.path('/manager/jobs/create');
-            }
+            $scope.data.form.role = $scope.data.roleMap[$scope.data.form.type];
+            var payload = _.pick($scope.data.form, ['name', 'password', 'role', 'email']);
+            console.log('registerController::submit! payload:', payload);
+            authService.signUp(payload).then(function success() {
+                console.log('sign up success');
+                toaster.pop('success', 'Successful', 'Y' +
+                    'ou can login now!');
+                $timeout(function () {
+                    $location.path('/');
+                    $location.replace();
+                }, 1000);
 
-            if($scope.data.form.type === 'Reviewer'){
-                $location.path('/manager/jobs/create');
-            }
-
-            if($scope.data.form.type === 'Job Seeker'){
-                $location.path('/manager/jobs/create');
-            }
+            }, function error(err) {
+                console.log('fail sign up', err);
+                toaster.pop('error', 'Sign up error', err);
+            });
         };
 
     };

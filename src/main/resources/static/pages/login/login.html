@@ -4,18 +4,10 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="#/">Found IT</a>
             </div>
-            <!--show if login as manager-->
-            <ul class="nav navbar-nav navbar-right">
-                <!--<li><a href="#/manager/jobs/create"><i class="fa fa-home"></i>Create Jobs</a></li>-->
-                <!--<li><a href="#/manager/jobs/myjob"><i class="fa fa-home"></i>Page2</a></li>-->
-                <!--<li><a href="#/manager/polls"><i class="fa fa-home"></i>Page3</a></li>-->
-                <!--<li><a href="#"><i class="fa fa-home"></i>Page4</a></li>-->
-                <!--<li><a href="#/"><i class="fa fa-home"></i>Log Out</a></li>-->
-            </ul>
         </div>
     </nav>
 </header>
-
+<toaster-container toaster-options="{'time-out': 1000}"></toaster-container>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -24,13 +16,13 @@
                     <form ng-submit="submit()">
                         <div class="form-group">
                             <label>Username</label>
-                            <input ng-model="data.form.username"
-                                   type="text" class="form-control" placeholder="Enter Username">
+                            <input ng-model="data.form.email"
+                                   type="text" class="form-control" placeholder="Enter Email">
                         </div>
 
                         <div class="form-group">
                             <label>Password</label>
-                            <input ng-model="data.form.pwd"
+                            <input ng-model="data.form.password"
                                    type="password" class="form-control" placeholder="Enter Password">
                         </div>
 
