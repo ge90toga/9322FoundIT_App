@@ -1,6 +1,7 @@
 package com.seek.api.controllers;
 
 import com.seek.api.model.Job;
+import com.seek.api.model.Reviewer;
 import com.seek.api.repository.UserRepository;
 import com.seek.api.security.JwtTokenHandler;
 import com.seek.api.service.JobService;
@@ -46,6 +47,9 @@ public class JobController {
         // Get user from token
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         job.setPublisher(username);
+        for (Reviewer reviewer : job.getReviewers()) {
+            reviewer.setJob(job);
+        }
         jobService.addJob(job);
         return new ResponseEntity<>(job, HttpStatus.CREATED);
     }
