@@ -39,7 +39,7 @@ foundITApp.controller('loginController', ['$scope', '$location', 'toaster', 'aut
                 //     }else{
                 //         toaster.pop('error', 'Login Failure!', 'Other Error!');
                 //     }
-                // })
+                // });
 
                 // the short cut todo: remove after dev
                 $scope.enterNext();

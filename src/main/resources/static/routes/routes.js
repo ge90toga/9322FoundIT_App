@@ -22,6 +22,15 @@ foundITApp.config(function ($routeProvider) {
             cache: false
         })
 
+        .when('/seeker/applist', {
+            templateUrl: 'pages/seeker/seeker.application.html',
+            cache: false
+        })
+
+        .when('/seeker/vote', {
+            templateUrl: 'pages/seeker/seeker.vote.html',
+            cache: false
+        })
 
         .when('/register', {
             templateUrl: 'pages/register/register.html',
@@ -43,7 +52,6 @@ foundITApp.config(function ($routeProvider) {
             controller: 'CreateJobCtrl',
             cache: false
         })
-
 
         .when('/manager/jobs/list', {
             templateUrl: 'pages/manager/manager.jobs.list.html',
