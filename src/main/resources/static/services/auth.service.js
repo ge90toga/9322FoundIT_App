@@ -1,5 +1,5 @@
 // SERVICES
-foundITApp.service('authService', function ($q, httpService, StorageService) {
+foundITApp.service('authService', function ($q, httpService, StorageService,$location) {
     var self = {
         signUp: function (data) {
             console.log('authService::signUp called!');
@@ -32,9 +32,11 @@ foundITApp.service('authService', function ($q, httpService, StorageService) {
             return d.promise;
         },
 
-        loginOut: function () {
+        logout: function () {
             console.log('authService::logout called!');
             StorageService.clear(); // clear
+            console.log('token is ', StorageService.getAuthToken());
+            $location.path('/');
         }
     };
     return self;

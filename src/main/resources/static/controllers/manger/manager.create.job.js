@@ -1,4 +1,4 @@
-foundITApp.controller('CreateJobCtrl', ['$scope', 'userService', function ($scope, userService) {
+foundITApp.controller('CreateJobCtrl', ['$scope', 'userService', 'authService', function ($scope, userService,authService) {
     $scope.init = function () {
         $scope.data = {
             form: {
@@ -16,6 +16,10 @@ foundITApp.controller('CreateJobCtrl', ['$scope', 'userService', function ($scop
             console.log('CreateJobCtrl::submit!', $scope.data.form);
         };
 
+        $scope.logout = function () {
+            console.log('log out is called');
+            authService.logout();
+        }
     };
     console.log('CreatJobCtrl::init');
     $scope.init();

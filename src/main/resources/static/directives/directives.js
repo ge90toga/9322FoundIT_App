@@ -19,10 +19,7 @@ foundITApp.directive("adminHeader", function() {
         templateUrl: 'directives/admin.header.html',
         replace: true,
         scope: {
-            weatherDay: "=",
-            convertToStandard: "&",
-            convertToDate: "&",
-            dateFormat: "@"
+            logout:"&"
         }
     }
 });

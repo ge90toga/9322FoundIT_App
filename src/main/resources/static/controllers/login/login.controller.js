@@ -20,26 +20,26 @@ foundITApp.controller('loginController', ['$scope', '$location', 'toaster', 'aut
 
             $scope.submit = function () {
                 // the real part
-                // console.log('loginController::submit! data:', JSON.stringify($scope.data.form, null, 2));
-                // var role = $scope.data.roleMap[$scope.data.form.type];
-                // var payload = _.pick($scope.data.form, ['email', 'password']);
-                // payload.role = role;
-                // console.log('login with payload', payload);
-                // authService.loginIn(payload).then(function succ() {
-                //     // login successful!
-                //     toaster.pop('success', 'Login Success!', '');
-                //     $timeout(function () {
-                //         $scope.enterNext();
-                //     },1000);
-                // }, function err(err) {
-                //     // unsuccessful login
-                //     console.log('login error', err);
-                //     if(err.status === 401){
-                //         toaster.pop('error', 'Login Failure!', 'Username and password mismatch!');
-                //     }else{
-                //         toaster.pop('error', 'Login Failure!', 'Other Error!');
-                //     }
-                // });
+                console.log('loginController::submit! data:', JSON.stringify($scope.data.form, null, 2));
+                var role = $scope.data.roleMap[$scope.data.form.type];
+                var payload = _.pick($scope.data.form, ['email', 'password']);
+                payload.role = role;
+                console.log('login with payload', payload);
+                authService.loginIn(payload).then(function succ() {
+                    // login successful!
+                    toaster.pop('success', 'Login Success!', '');
+                    $timeout(function () {
+                        $scope.enterNext();
+                    },1000);
+                }, function err(err) {
+                    // unsuccessful login
+                    console.log('login error', err);
+                    if(err.status === 401){
+                        toaster.pop('error', 'Login Failure!', 'Username and password mismatch!');
+                    }else{
+                        toaster.pop('error', 'Login Failure!', 'Other Error!');
+                    }
+                });
 
                 // the short cut todo: remove after dev
                 $scope.enterNext();
