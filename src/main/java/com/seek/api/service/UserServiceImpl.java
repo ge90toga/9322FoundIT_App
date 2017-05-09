@@ -42,7 +42,11 @@ public class UserServiceImpl implements UserService  {
     @Override
     public Optional<User> findUser(Long id) {
         return Optional.of(userRepository.findOne(id));
+    }
 
+    @Override
+    public Optional<User> findUserByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
     @Override
@@ -52,9 +56,15 @@ public class UserServiceImpl implements UserService  {
     }
 
     @Override
+    public List<User> findAllReviewer() {
+        List<User> users = userRepository.findByRole("ROLE_REVIEWER");
+        return users;
+    }
+
+    @Override
     public List<User> findAllUser() {
-        return null;
-//        return userRepository.findByRole("ROLE_USER");
+        List<User> users = userRepository.findByRole("ROLE_USER");
+        return users;
     }
 
     @Override
@@ -65,16 +75,12 @@ public class UserServiceImpl implements UserService  {
 
     private User toUserRole(UserDTO userDTO) {
         User user = userDTO.toUser();
-//        Role role = new Role();
         if (userDTO == null || userDTO.equals("")) {
             user.setRole("ROLE_USER");
-//            role.setRolename("ROLE_USER");
         } else {
             user.setRole(userDTO.getRole());
-//            role.setRolename(userDTO.getRole());
         }
 
-//        user.setRole(role);
         return user;
     }
 
