@@ -4,7 +4,6 @@ import com.seek.api.dto.ReviewDTO;
 import com.seek.api.model.*;
 import com.seek.api.repository.ApplicationRepository;
 import com.seek.api.repository.JobRepository;
-import com.seek.api.repository.PostRepository;
 import com.seek.api.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
