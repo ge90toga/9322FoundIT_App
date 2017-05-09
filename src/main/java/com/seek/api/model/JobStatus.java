@@ -7,6 +7,6 @@ public enum JobStatus {
     OPEN,
     REVIEW_POCESSING,
     REVIEW_COMPLETED,
-    INVITATION_SEND,
+//    INVITATION_SEND,
     CLOSED,
 }

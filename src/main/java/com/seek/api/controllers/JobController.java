@@ -8,6 +8,7 @@ import com.seek.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,17 +20,13 @@ import java.util.List;
 @RequestMapping("/api/jobs")
 public class JobController {
 
-    private final UserRepository userRepository;
     private final UserService userService;
     private final JobService jobService;
-    private final JwtTokenHandler jwtTokenHandler;
 
     @Autowired
-    public JobController(UserRepository userRepository, UserService userService, JobService jobService, JwtTokenHandler jwtTokenHandler) {
-        this.userRepository = userRepository;
+    public JobController(UserService userService, JobService jobService) {
         this.userService = userService;
         this.jobService = jobService;
-        this.jwtTokenHandler = jwtTokenHandler;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -46,6 +43,9 @@ public class JobController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Job> addNewJob(@RequestBody Job job) {
+        // Get user from token
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        job.setPublisher(username);
         jobService.addJob(job);
         return new ResponseEntity<>(job, HttpStatus.CREATED);
     }

@@ -1,9 +1,7 @@
 package com.seek.api.service;
 
-import com.seek.api.model.Application;
-import com.seek.api.model.Job;
-import com.seek.api.model.Post;
-import com.seek.api.model.Review;
+import com.seek.api.dto.ReviewDTO;
+import com.seek.api.model.*;
 import com.seek.api.repository.ApplicationRepository;
 import com.seek.api.repository.JobRepository;
 import com.seek.api.repository.PostRepository;
@@ -12,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -57,6 +56,11 @@ public class JobServiceImpl implements JobService {
     @Override
     public Job findJobByID(Long id) {
         return jobRepository.findOne(id);
+    }
+
+    @Override
+    public List<Job> findJobByPublisherID(String publisherID) {
+        return jobRepository.findByPublisher(publisherID);
     }
 
     @Override
@@ -108,5 +112,53 @@ public class JobServiceImpl implements JobService {
     @Override
     public List<Review> findReviewByAppID(String appID) {
         return reviewRepository.findByApplicationID(appID);
+    }
+
+    @Override
+    public List<ReviewDTO> findReviewComboByUserID(String userID) {
+        List<ReviewDTO> reviewDTOS = new ArrayList<>();
+
+        List<Job> jobs = findJobByPublisherID(userID);
+        if (jobs == null || jobs.isEmpty()) {
+            System.err.println("findReviewComboByUserID | job not found.");
+            return reviewDTOS;
+        }
+
+        for (Job job : jobs) {
+
+            List<Application> applications = findApplicationByJobID(job.getId().toString());
+            if (applications == null || applications.isEmpty()) {
+                System.err.println("findReviewComboByUserID | application not found.");
+                return reviewDTOS;
+            }
+
+            for (Application application : applications) {
+                ReviewDTO reviewDTO = new ReviewDTO();
+                reviewDTO.setReviewerID(userID);
+                reviewDTO.setJobTitle(job.getTitle());
+                reviewDTO.setCv(application.getCv());
+                reviewDTO.setApplicantName(application.getEmail());
+
+                List<Review> reviews = findReviewByAppID(application.getId().toString());
+
+                if (reviews == null || reviews.isEmpty()) {
+                    System.err.println("findReviewComboByUserID | review not found.");
+                    reviewDTOS.add(reviewDTO);
+                    continue;
+                }
+
+                for (Review review : reviews) {
+                    reviewDTO.setReviewID(review.getId().toString());
+                    reviewDTO.setContent(review.getContent());
+                    reviewDTO.setResult(review.isResult());
+                    reviewDTOS.add(reviewDTO);
+                    continue;
+                }
+
+            }
+
+        }
+
+        return reviewDTOS;
     }
 }

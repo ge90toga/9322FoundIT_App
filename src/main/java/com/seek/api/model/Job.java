@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,8 +41,10 @@ public class Job {
     @Enumerated(EnumType.STRING)
     @Setter @Getter private JobStatus status = JobStatus.OPEN;
 
-//    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-//    @JoinColumn(name="application_id")
+    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Setter @Getter private List<Reviewer> reviewers = new ArrayList<>();
+
+//    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
 //    @Setter @Getter private List<Application> applications;
 
 
@@ -56,6 +59,14 @@ public class Job {
         this.description = description;
     }
 
+    public Job(String title, String type, String company, String description, List<Reviewer> reviewers) {
+        this.title = title;
+        this.type = type;
+        this.company = company;
+        this.description = description;
+        this.reviewers = reviewers;
+    }
+
     public Job(String publisher, String title, String type, String company, String description, JobStatus status) {
         this.publisher = publisher;
         this.title = title;
@@ -63,6 +74,16 @@ public class Job {
         this.company = company;
         this.description = description;
         this.status = status;
+    }
+
+    public Job(String publisher, String title, String type, String company, String description, JobStatus status, List<Reviewer> reviewers) {
+        this.publisher = publisher;
+        this.title = title;
+        this.type = type;
+        this.company = company;
+        this.description = description;
+        this.status = status;
+        this.reviewers = reviewers;
     }
 
     @Override
@@ -75,7 +96,7 @@ public class Job {
                 ", company='" + company + '\'' +
                 ", description='" + description + '\'' +
                 ", status=" + status +
+                ", reviewers=" + reviewers +
                 '}';
     }
-
 }

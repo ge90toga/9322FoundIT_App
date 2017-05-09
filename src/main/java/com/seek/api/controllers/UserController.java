@@ -21,10 +21,6 @@ public class UserController {
         this.jwtTokenHandler = jwtTokenHandler;
     }
 
-//    @RequestMapping(method = RequestMethod.POST)
-//    public ResponseEntity create(@Valid @RequestBody UserDTO params) {
-//        userService.createUser(params);
-//        HttpHeaders headers = new HttpHeaders();
-//        return new ResponseEntity(headers, HttpStatus.OK);
-//    }
+
+
 }

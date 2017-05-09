@@ -1,6 +1,7 @@
 package com.seek.api.service;
 
 
+import com.seek.api.dto.ReviewDTO;
 import com.seek.api.dto.UserDTO;
 import com.seek.api.model.Application;
 import com.seek.api.model.Job;
@@ -21,6 +22,8 @@ public interface JobService {
     boolean existJob(Long id);
 
     Job findJobByID(Long id);
+
+    List<Job> findJobByPublisherID(String publisherID);
 
     List<Job> findJobByName(String name);
 
@@ -43,5 +46,7 @@ public interface JobService {
     Review findReviewByID(Long id);
 
     List<Review> findReviewByAppID(String appID);
+
+    List<ReviewDTO> findReviewComboByUserID(String userID);
 
 }

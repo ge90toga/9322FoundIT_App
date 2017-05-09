@@ -9,6 +9,6 @@ public enum ApplicationStatus {
     REVIEWING,
     APPROVED,
     DECLINED,
-
+    INVITATION_SEND,
 
 }
