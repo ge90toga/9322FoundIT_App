@@ -30,10 +30,12 @@ foundITApp.service('authService', function ($q, httpService, StorageService) {
                 d.reject(err);
             });
             return d.promise;
+        },
+
+        loginOut: function () {
+            console.log('authService::logout called!');
+            StorageService.clear(); // clear
         }
-
-
-
     };
     return self;
 });
