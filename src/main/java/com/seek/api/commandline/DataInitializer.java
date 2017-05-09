@@ -16,7 +16,7 @@ import java.util.List;
  * initial data at application startup.
  */
 @Component
-    public class DataInitializer implements CommandLineRunner {
+public class DataInitializer implements CommandLineRunner {
 
     @Autowired
     UserService userService;
@@ -24,13 +24,13 @@ import java.util.List;
     @Autowired
     JobService jobService;
 
-	@Override
-	public void run(String... arg0) throws Exception {
+    @Override
+    public void run(String... arg0) throws Exception {
 //        addUser();
 //        testJobs();
-	}
+    }
 
-	private void addUser() {
+    private void addUser() {
         userService.createUser(new UserDTO("295046974@qq.com", "123", "frank", "ROLE_ADMIN"));
         userService.createUser(new UserDTO("ruan.yuji@gmail.com", "123", "yuji", "ROLE_USER"));
         userService.createUser(new UserDTO("test@gmail.com", "123", "test1", "ROLE_USER"));
@@ -38,9 +38,9 @@ import java.util.List;
         userService.createUser(new UserDTO("review2@gmail.com", "123", "review2", "ROLE_REVIEWER"));
     }
 
-	private void testJobs() {
-	    Job job1 = new Job("1", "Java Dev", "full-time", "Google", "hello", JobStatus.OPEN);
-	    jobService.addJob(job1);
+    private void testJobs() {
+        Job job1 = new Job("1", "Java Dev", "full-time", "Google", "hello", JobStatus.OPEN);
+        jobService.addJob(job1);
 //        Job job2 = new Job("Frank1", "Java Dev", "full-time", "Google", "hello", JobStatus.OPEN);
 //        jobService.addJob(job2);
 //        System.out.println("exist job: " + jobService.existJob(2L));
@@ -64,6 +64,6 @@ import java.util.List;
 //        System.out.println(jobList.size());
 //        Job j = jobService.findJobByID(1L);
 //        System.out.println(j);
-	}
+    }
 
 }

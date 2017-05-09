@@ -26,3 +26,31 @@ foundITApp.directive("adminHeader", function() {
         }
     }
 });
+
+foundITApp.directive("reviewerHeader", function() {
+    return {
+        restrict: 'E',
+        templateUrl: 'directives/reviewer.header.html',
+        replace: true,
+        scope: {
+            weatherDay: "=",
+            convertToStandard: "&",
+            convertToDate: "&",
+            dateFormat: "@"
+        }
+    }
+});
+
+foundITApp.directive("seekerHeader", function() {
+    return {
+        restrict: 'E',
+        templateUrl: 'directives/seeker.header.html',
+        replace: true,
+        scope: {
+            weatherDay: "=",
+            convertToStandard: "&",
+            convertToDate: "&",
+            dateFormat: "@"
+        }
+    }
+});

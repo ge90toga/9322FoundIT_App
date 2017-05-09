@@ -4,7 +4,7 @@
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="page-header">My Opening Jobs</h1>
+                    <h3 class="page-header">My Opening Jobs</h3>
                 </div>
             </div>
             <!--opening jobs-->
@@ -21,20 +21,20 @@
                     <div class="form-group">
                         <label>Description</label>
                         <textarea ng-model="job.description" class="form-control"
-                                  placeholder="Enter Page Body" ng-disabled="true"></textarea>
+                                  placeholder="Enter Page Body" ng-disabled="!data.enableEditList[{{$index}}]"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Status</label>
                         <select class="form-control"
-                                ng-model="job.state"
+                                ng-model="job.state" ng-disabled="!data.enableEditList[{{$index}}]"
                                 ng-options="option for option in data.jobStates">
-
                         </select>
                     </div>
                     <div class="pull-right">
-                        <button class="btn btn-default btn-success">Edit</button>
-                        <button class="btn btn-default btn-warning">Update</button>
-                        <button class="btn btn-default btn-danger">Delete</button>
+                        <button ng-click="editItem($index)" class="btn btn-default btn-success">Edit</button>
+                        <button ng-disabled="!data.enableEditList[{{$index}}]" ng-click="stopEdit($index)" class="btn btn-default btn-danger">Cancel</button>
+                        <button ng-disabled="!data.enableEditList[{{$index}}]" ng-click="updateOpenJob($index)" class="btn btn-default btn-warning">Update</button>
+                        <button ng-disabled="!data.enableEditList[{{$index}}]" ng-click="deleteOpenJob($index)" class="btn btn-default btn-danger">Delete</button>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
             <!--in review-->
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="page-header">My Jobs In Review</h1>
+                    <h3 class="page-header">My Jobs In Review</h3>
                 </div>
             </div>
             <div class="panel panel-default" ng-repeat="job in data.inReviewJobs">
@@ -63,15 +63,16 @@
                     </div>
                     <div class="form-group">
                         <label>Status</label>
-                        <input class="form-control" ng-model="job.state" ng-disabled="true"></input>
+                        <input class="form-control" ng-model="job.state" ng-disabled="true"/>
                     </div>
                 </div>
             </div>
             <!--in review ends-->
+
             <!--completed review -->
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="page-header">My Completed Review Jobs</h1>
+                    <h3 class="page-header">My Completed Review Jobs</h3>
                 </div>
             </div>
             <div class="panel panel-default" ng-repeat="job in data.reviewCompleteJobs">
@@ -91,7 +92,7 @@
                     </div>
                     <div class="form-group">
                         <label>Status</label>
-                        <input class="form-control" ng-model="job.state" ng-disabled="true"></input>
+                        <input class="form-control" ng-model="job.state" ng-disabled="true"/>
                     </div>
                     <div class="pull-right">
                         <button class="btn btn-default btn-success">Send Invitation</button>

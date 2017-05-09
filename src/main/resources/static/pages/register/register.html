@@ -4,64 +4,45 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="#/">Found IT</a>
             </div>
-            <!--show if login as manager-->
-            <ul class="nav navbar-nav navbar-right">
-                <!--<li><a href="#/manager/jobs/create"><i class="fa fa-home"></i>Create Jobs</a></li>-->
-                <!--<li><a href="#/manager/jobs/myjob"><i class="fa fa-home"></i>Page2</a></li>-->
-                <!--<li><a href="#/manager/polls"><i class="fa fa-home"></i>Page3</a></li>-->
-                <!--<li><a href="#"><i class="fa fa-home"></i>Page4</a></li>-->
-                <!--<li><a href="#/"><i class="fa fa-home"></i>Log Out</a></li>-->
-            </ul>
         </div>
     </nav>
 </header>
-
+<toaster-container toaster-options="{'time-out': 1000}"></toaster-container>
 <div class="container">
     <div class="row">
+        <h4 class="page-header">Sign up</h4>
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <form ng-submit="submit()">
                         <div class="form-group">
-                            <label>Username</label>
-                            <input ng-model="data.form.username"
-                                   type="text" class="form-control" placeholder="Enter Username">
+                            <label>Email</label>
+                            <input ng-model="data.form.email"
+                                   type="text" class="form-control" placeholder="Enter Your Email">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input ng-model="data.form.name"
+                                   type="text" class="form-control" placeholder="Enter Your Name">
                         </div>
 
                         <div class="form-group">
                             <label>Password</label>
-                            <input ng-model="data.form.pwd"
+                            <input ng-model="data.form.password"
                                    type="password" class="form-control" placeholder="Enter Password">
                         </div>
 
                         <div class="form-group">
-                            <label>Login Type</label>
+                            <label>Identity Type</label>
                             <select class="form-control"
                                     ng-model="data.form.type"
                                     ng-options="option for option in data.loginTypes">
                             </select>
                         </div>
 
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input ng-model="data.form.pwd"
-                                   type="text" class="form-control" placeholder="Enter Password">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Age</label>
-                            <input ng-model="data.form.pwd"
-                                   type="text" class="form-control" placeholder="Enter Password">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Degree</label>
-                            <input ng-model="data.form.pwd"
-                                   type="text" class="form-control" placeholder="Enter Password">
-                        </div>
-
                         <div class="pull-right">
-                            <button type="submit" class="btn btn-default btn-success">Register</button>
+                            <button type="submit" class="btn btn-default btn-success">Sign up</button>
                         </div>
                     </form>
                 </div>

@@ -12,6 +12,16 @@ foundITApp.config(function ($routeProvider) {
             controller: 'loginController'
         })
 
+        .when('/reviewer/review', {
+            templateUrl: 'pages/reviewer/reviewer.html',
+            cache: false
+        })
+
+        .when('/seeker/search', {
+            templateUrl: 'pages/seeker/seeker.html',
+            cache: false
+        })
+
 
         .when('/register', {
             templateUrl: 'pages/register/register.html',
@@ -33,6 +43,7 @@ foundITApp.config(function ($routeProvider) {
             controller: 'CreateJobCtrl',
             cache: false
         })
+
 
         .when('/manager/jobs/list', {
             templateUrl: 'pages/manager/manager.jobs.list.html',

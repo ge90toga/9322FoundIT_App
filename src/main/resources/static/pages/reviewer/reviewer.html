@@ -1,0 +1,82 @@
+<reviewer-header></reviewer-header>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="page-header">My Application To Review</h3>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form ng-submit="submit()">
+                        <div class="form-group">
+                            <label>Job Title</label>
+                            <input ng-model="" type="text" class="form-control" ng-disabled="true"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Job Description</label>
+                            <textarea ng-model="" type="text" class="form-control"
+                                      ng-disabled="true"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Applicant Name</label>
+                            <input ng-model="" type="text" class="form-control" ng-disabled="true"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Applicant Age</label>
+                            <input ng-model="" type="text" class="form-control" ng-disabled="true"/>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Applicant Education Experience</label>
+                            <textarea ng-model="" type="text" class="form-control" ng-disabled="true"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Applicant Cover letter</label>
+                            <textarea ng-model="" type="text" class="form-control"
+                                      ng-disabled="true"></textarea>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Your Comment:</label>
+                            <textarea ng-model="" type="text" class="form-control"
+                                      ng-disabled="true"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="custom-control custom-radio">
+                                <input id="radio1" name="radio" type="radio" class="custom-control-input">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">Recommend this candidate</span>
+                            </label>
+                            <label class="custom-control custom-radio">
+                                <input id="radio2" name="radio" type="radio" class="custom-control-input">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">Decline this candidate</span>
+                            </label>
+                        </div>
+
+                        <div class="pull-right">
+                            <button type="submit" class="btn btn-default btn-success">Create</button>
+                            <!--<button ng-click="submit()" class="btn btn-default btn-success">Submit</button>-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="page-header">Applications Reviewed</h3>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

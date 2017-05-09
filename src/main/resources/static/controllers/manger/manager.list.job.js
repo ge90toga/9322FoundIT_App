@@ -1,4 +1,4 @@
-foundITApp.controller('JobListCtrl', ['$scope', function ($scope) {
+foundITApp.controller('JobListCtrl', ['$scope', 'managerService', function ($scope, managerService) {
     $scope.init = function () {
         $scope.data = {
             jobTypes: ['Full Time', 'Casual', 'Part Time'],
@@ -6,64 +6,46 @@ foundITApp.controller('JobListCtrl', ['$scope', function ($scope) {
             jobInReviewStates: ['in_review'],
             openJobs: [],
             inReviewJobs: [],
-            reviewCompleteJobs: []
+            reviewCompleteJobs: [],
+            enableEditList: []
         };
 
-        $scope.jobList = [
-            {
-                jobid: '9i3kds',
-                title: 'Nodejs Developer',
-                company: 'The company',
-                salary: '3000$',
-                type: 'Full Time',
-                description: 'The Javascript in need.',
-                state: 'open'
-            },
-            {
-                jobid: 'rwre2',
-                title: 'Javascript Developer',
-                company: 'The company',
-                salary: '2000$',
-                type: 'Part Time',
-                description: 'The Javascript in need.',
-                state: 'open'
-            },
-            {
-                jobid: 'fgdfw3',
-                title: 'Java Developer',
-                company: 'The company 2',
-                salary: '500$',
-                type: 'Full Time',
-                description: 'The Java in need.',
-                state: 'in_review'
-            },
-            {
-                jobid: 'fgsrt5',
-                title: 'Python Developer',
-                company: 'The company 2',
-                salary: '600$',
-                type: 'Part Time',
-                description: 'The Java in need.',
-                state: 'review_complete'
-            }
-        ];
-
-        console.log(JSON.stringify($scope.jobList,null,2));
-
-
-        //console.log($scope.jobList);
-
-        $scope.classifyJobs = function () {
-            $scope.data.openJobs = _.pickBy($scope.jobList, {state: 'open'});
-            $scope.data.inReviewJobs = _.pickBy($scope.jobList, {state: 'in_review'});
-            $scope.data.reviewCompleteJobs = _.pickBy($scope.jobList, {state: 'review_complete'});
+        $scope.editItem = function (index) {
+            console.log("edit index called ", index);
+            $scope.data.enableEditList[index] = true;
         };
 
-        $scope.classifyJobs();
-        // console.log($scope.data.openJobs);
-        // console.log($scope.data.inReviewJobs);
-        // console.log($scope.data.reviewCompleteJobs);
+        $scope.stopEdit = function (index) {
+            console.log("stop edit index" + index);
+            $scope.data.enableEditList[index] = false;
+        };
 
+        $scope.updateOpenJob = function (index) {
+            $scope.stopEdit(index);
+            console.log('the job to update is', JSON.stringify($scope.data.openJobs[index], null, 2));
+        };
+
+        $scope.deleteOpenJob = function (index) {
+            $scope.stopEdit(index);
+            console.log('the job id delete is',$scope.data.openJobs[index].jobid);
+        };
+
+        // classify jobs based on state
+        $scope.classifyJobs = function (jobList) {
+            $scope.data.openJobs = _.pickBy(jobList, {state: 'open'});
+            $scope.data.inReviewJobs = _.pickBy(jobList, {state: 'in_review'});
+            $scope.data.reviewCompleteJobs = _.pickBy(jobList, {state: 'review_complete'});
+        };
+
+        $scope.getJobList = function () {
+            managerService.getJobList().then(function success(jobs) {
+                console.log('JobListCtrl\'s jobs', jobs);
+                $scope.classifyJobs(jobs);
+            }, function error(err) {
+                console.log('got error', err);
+            });
+        };
+        $scope.getJobList();
     };
     console.log('JobListCtrl::init');
     $scope.init();
