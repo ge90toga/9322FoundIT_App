@@ -50,7 +50,7 @@ let users = {
         "role": "ROLE_USER"
     },
     u5: { //user5
-        "email": "user_6@gmail.com",
+        "email": "user_5@gmail.com",
         "password": "12345678",
         "name": "User5",
         "role": "ROLE_USER"
