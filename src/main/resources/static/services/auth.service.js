@@ -1,5 +1,5 @@
 // SERVICES
-foundITApp.service('authService', function ($q, httpService, StorageService,$location) {
+foundITApp.service('authService', function ($q, httpService, StorageService, $location) {
     var self = {
         signUp: function (data) {
             console.log('authService::signUp called!');
@@ -19,7 +19,7 @@ foundITApp.service('authService', function ($q, httpService, StorageService,$loc
             var d = $q.defer();
             httpService.postData('api/login', data).then(function success(res) {
                 var authToken = res.headers()['x-auth-token'];
-                if(authToken){ // store auth token
+                if (authToken) { // store auth token
                     console.log('storerge', authToken);
                     StorageService.storeAuthToken(authToken);
                     console.log('storerge get', StorageService.getAuthToken());

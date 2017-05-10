@@ -38,11 +38,6 @@ foundITApp.controller('CreateJobCtrl', ['$scope', 'authService', 'managerService
             $scope.refresh();
         };
 
-        $scope.logout = function () {
-            console.log('log out is called');
-            authService.logout();
-        };
-
         $scope.getReviewers = function () {
             console.log('get getReviewers');
             managerService.getReviewers().then(function success(rlist) {

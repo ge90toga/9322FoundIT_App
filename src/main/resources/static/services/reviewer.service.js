@@ -1,3 +1,25 @@
-/**
- * Created by linus on 10/5/17.
- */
+// SERVICES
+foundITApp.service('reviewerService', function ($q, httpService) {
+    var self = {
+        getMyReviewCombos: function () {
+            var d = $q.defer();
+            httpService.getData('api/admin/review/combo').then(function success(response) {
+                console.log('reviewerService getMyReviewCombos response', response);
+                d.resolve(response.data);
+            }, function error(err) {
+                console.log('reviewerService::getMyReviewCombos Error', err);
+                d.reject(err);
+            });
+            return d.promise;
+        },
+
+        createReview : function () {
+
+        },
+
+        upDateReview: function () {
+
+        }
+    };
+    return self;
+});

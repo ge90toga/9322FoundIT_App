@@ -214,8 +214,7 @@ let commonHeader;
         headers: commonHeader,
         json: {
             "cv": "I am user 1 apply job1",
-            "jobID": 1,
-            "status": "WAITING"
+            "jobID": 1
         }
     });
     console.log(res.getBody('utf-8'));
@@ -240,8 +239,7 @@ let commonHeader;
         headers: commonHeader,
         json: {
             "cv": "I am user 2 apply job1",
-            "jobID": 1,
-            "status": "WAITING"
+            "jobID": 1
         }
     });
     console.log(res.getBody('utf-8'));
@@ -266,8 +264,7 @@ let commonHeader;
         headers: commonHeader,
         json: {
             "cv": "I am user 3 apply job1",
-            "jobID": 1,
-            "status": "WAITING"
+            "jobID": 1
         }
     });
     console.log(res.getBody('utf-8'));
@@ -293,8 +290,7 @@ let commonHeader;
         headers: commonHeader,
         json: {
             "cv": "I am user 4 apply job2",
-            "jobID": 2,
-            "status": "WAITING"
+            "jobID": 2
         }
     });
     console.log(res.getBody('utf-8'));
@@ -319,8 +315,7 @@ let commonHeader;
         headers: commonHeader,
         json: {
             "cv": "I am user 5 apply job2",
-            "jobID": 2,
-            "status": "WAITING"
+            "jobID": 2
         }
     });
     console.log(res.getBody('utf-8'));
@@ -345,8 +340,7 @@ let commonHeader;
         headers: commonHeader,
         json: {
             "cv": "I am user 6 apply job2",
-            "jobID": 2,
-            "status": "WAITING"
+            "jobID": 2
         }
     });
     console.log(res.getBody('utf-8'));

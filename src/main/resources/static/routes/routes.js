@@ -2,10 +2,10 @@
 foundITApp.config(function ($routeProvider) {
     $routeProvider
 
-        // .when('/', {
-        //     templateUrl: 'pages/home.htm',
-        //     controller: 'homeController'
-        // })
+    // .when('/', {
+    //     templateUrl: 'pages/home.htm',
+    //     controller: 'homeController'
+    // })
 
         .when('/', {
             templateUrl: 'pages/login/login.html',
@@ -14,12 +14,14 @@ foundITApp.config(function ($routeProvider) {
 
         .when('/reviewer/review', {
             templateUrl: 'pages/reviewer/reviewer.html',
-            cache: false
+            cache: false,
+            controller: 'reviewerCtrl'
         })
 
         .when('/seeker/search', {
             templateUrl: 'pages/seeker/seeker.html',
-            cache: false
+            cache: false,
+            controller: 'seekerSearchCtrl'
         })
 
         .when('/seeker/applist', {
