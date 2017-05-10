@@ -10,7 +10,6 @@ foundITApp.service('httpService', function ($http, StorageService) {
          */
         getData: function (path, queryParams) {
             var url = self.baseUrl + path + self.__buildQueryStr(queryParams);
-            //TODO: add x-auth header
             var headers = {};
             var token = StorageService.getAuthToken();
             if (token) {
@@ -37,13 +36,49 @@ foundITApp.service('httpService', function ($http, StorageService) {
             if (token) {
                 headers['x-auth-token'] = token;
             }
-            //TODO: add x-auth header
             console.log('httpService::postData::url', url);
             return $http({
                 method: 'POST',
                 headers: headers,
                 url: url,
                 data: payload
+            });
+        },
+
+        /**
+         *
+         * @param path
+         * @param payload
+         * @returns {*}
+         */
+        putData: function (path, payload) {
+            var url = self.baseUrl + path;
+            var headers = {};
+            var token = StorageService.getAuthToken();
+            if (token) {
+                headers['x-auth-token'] = token;
+            }
+            console.log('httpService::postData::url', url);
+            return $http({
+                method: 'PUT',
+                headers: headers,
+                url: url,
+                data: payload
+            });
+        },
+
+        deleteData: function (path) {
+            var url = self.baseUrl + path;
+            var headers = {};
+            var token = StorageService.getAuthToken();
+            if (token) {
+                headers['x-auth-token'] = token;
+            }
+            console.log('httpService::postData::url', url);
+            return $http({
+                method: 'PUT',
+                headers: headers,
+                url: url
             });
         },
 

@@ -23,6 +23,18 @@ foundITApp.service('managerService', function ($q,httpService) {
                 d.reject(err);
             });
             return d.promise;
+        },
+
+        createJob: function (job) {
+            var d = $q.defer();
+            httpService.postData('api/jobs',job).then(function success(response) {
+                console.log('managerService createJob response',response);
+                d.resolve(response.data);
+            }, function error(err) {
+                console.log('managerService::createJob error', err);
+                d.reject(err);
+            });
+            return d.promise;
         }
 
     };
