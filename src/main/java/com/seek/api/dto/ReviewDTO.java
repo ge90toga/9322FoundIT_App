@@ -19,9 +19,13 @@ public class ReviewDTO {
 
     @Setter @Getter private boolean result;
 
+    @Setter @Getter private String jobID;
+
     @Setter @Getter private String jobTitle;
 
     @Setter @Getter private String cv;
+
+    @Setter @Getter private String applicantID;
 
     @Setter @Getter private String applicantName;
 

@@ -145,8 +145,10 @@ public class JobServiceImpl implements JobService {
             for (Application application : applications) {
                 ReviewDTO reviewDTO = new ReviewDTO();
                 reviewDTO.setReviewerID(username);
+                reviewDTO.setJobID(reviewer.getJob().getId().toString());
                 reviewDTO.setJobTitle(reviewer.getJob().getTitle());
                 reviewDTO.setCv(application.getCv());
+                reviewDTO.setApplicantID(application.getId().toString());
                 reviewDTO.setApplicantName(application.getEmail());
 
                 List<Review> reviews = findReviewByAppID(application.getId().toString());
