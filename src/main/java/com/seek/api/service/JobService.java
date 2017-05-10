@@ -1,6 +1,7 @@
 package com.seek.api.service;
 
 
+import com.seek.api.dto.ApplicationDTO;
 import com.seek.api.dto.ReviewDTO;
 import com.seek.api.dto.UserDTO;
 import com.seek.api.model.Application;
@@ -53,5 +54,7 @@ public interface JobService {
     List<Review> findReviewByAppID(String appID);
 
     List<ReviewDTO> findReviewComboByUserID(String username);
+
+    List<ApplicationDTO> findApplicationComboByPublisher(String username);
 
 }

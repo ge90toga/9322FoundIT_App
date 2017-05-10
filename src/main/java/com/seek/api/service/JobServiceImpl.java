@@ -1,5 +1,6 @@
 package com.seek.api.service;
 
+import com.seek.api.dto.ApplicationDTO;
 import com.seek.api.dto.ReviewDTO;
 import com.seek.api.model.*;
 import com.seek.api.repository.ApplicationRepository;
@@ -169,5 +170,39 @@ public class JobServiceImpl implements JobService {
         }
 
         return reviewDTOS;
+    }
+
+    @Override
+    public List<ApplicationDTO> findApplicationComboByPublisher(String username) {
+        List<ApplicationDTO> applicationDTOS = new ArrayList<>();
+        List<Job> jobs = findJobByPublisher(username);
+        if (jobs.isEmpty()) {
+            System.err.println("findApplicationComboByPublisher | job not found.");
+            return applicationDTOS;
+        }
+
+        for (Job job : jobs) {
+
+            List<Application> applications = findApplicationByJobID(job.getId().toString());
+
+            if (applications.isEmpty()) {
+                System.err.println("findApplicationComboByPublisher | app not found.");
+                return applicationDTOS;
+            }
+
+            for (Application application : applications) {
+                ApplicationDTO applicationDTO = new ApplicationDTO();
+                applicationDTO.setPublisher(username);
+                applicationDTO.setJobID(job.getId().toString());
+                applicationDTO.setJobTitle(job.getTitle());
+                applicationDTO.setApplicationID(application.getId().toString());
+                applicationDTO.setApplicant(job.getPublisher());
+                applicationDTO.setApplicationStatus(application.getStatus());
+                applicationDTOS.add(applicationDTO);
+            }
+
+        }
+
+        return applicationDTOS;
     }
 }

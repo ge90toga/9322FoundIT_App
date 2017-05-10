@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,9 +32,14 @@ public class JobController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> getAllJobs() {
-        List<Job> allPosts =  jobService.findAllJob();
-        return new ResponseEntity<>(allPosts, HttpStatus.OK);
+    public ResponseEntity<?> getAllJobs(@RequestParam(value = "title", required = false) String title) {
+        List<Job> jobs = new ArrayList<>();
+        if (title != null && !title.isEmpty()) {
+            jobs = jobService.findJobByName(title);
+        } else {
+            jobs = jobService.findAllJob();
+        }
+        return new ResponseEntity<>(jobs, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -57,7 +63,7 @@ public class JobController {
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<Job> updateJob(@RequestBody Job job) {
         jobService.updateJob(job);
-        return new ResponseEntity<>(job, HttpStatus.CREATED);
+        return new ResponseEntity<>(job, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

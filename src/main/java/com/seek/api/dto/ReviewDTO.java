@@ -8,6 +8,9 @@ import lombok.Setter;
  */
 public class ReviewDTO {
 
+    /**
+     * reviewer username (email).
+     */
     @Setter @Getter private String reviewerID;
 
     @Setter @Getter private String reviewID;

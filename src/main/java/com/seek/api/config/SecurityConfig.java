@@ -55,13 +55,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/api/posts/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/posts/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/api/users").hasRole("USER")
-                .antMatchers(HttpMethod.GET, "/api/jobs/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/jobs").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/jobs/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/jobs/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/api/jobs/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/console/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/register").permitAll()
-//                .antMatchers("/api/admin/**").hasAnyAuthority("ADMIN", "REVIEWER")
+                .antMatchers("/api/admin/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_REVIEWER")
+                .antMatchers(HttpMethod.GET,"/api/apply/combo").hasRole("ADMIN")
                 .antMatchers("/api/apply/**").authenticated();// TODO
 
         http.addFilterBefore(

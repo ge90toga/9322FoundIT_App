@@ -63,7 +63,7 @@ public class AdminController {
     @RequestMapping(value = "/review", method = RequestMethod.PUT)
     public ResponseEntity<Review> updateReview(@RequestBody Review review) {
         jobService.updateReview(review);
-        return new ResponseEntity<>(review, HttpStatus.CREATED);
+        return new ResponseEntity<>(review, HttpStatus.OK);
     }
 
 }

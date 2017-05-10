@@ -1,5 +1,6 @@
 package com.seek.api.controllers;
 
+import com.seek.api.dto.ApplicationDTO;
 import com.seek.api.model.Application;
 import com.seek.api.model.Job;
 import com.seek.api.model.Review;
@@ -58,7 +59,14 @@ public class ApplyController {
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<Application> updateApplication(@RequestBody Application application) {
         jobService.updateApplication(application);
-        return new ResponseEntity<>(application, HttpStatus.CREATED);
+        return new ResponseEntity<>(application, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/combo", method = RequestMethod.GET)
+    public ResponseEntity<?> getAllApplicationCombo() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        List<ApplicationDTO> applicationDTOS = jobService.findApplicationComboByPublisher(username);
+        return new ResponseEntity<>(applicationDTOS, HttpStatus.OK);
     }
 
 }
