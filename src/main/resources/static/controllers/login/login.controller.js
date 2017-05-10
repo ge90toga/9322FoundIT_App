@@ -34,7 +34,7 @@ foundITApp.controller('loginController', ['$scope', '$location', 'toaster', 'aut
                 }, function err(err) {
                     // unsuccessful login
                     console.log('login error', err);
-                    if(err.status === 401){
+                    if(err.status === 401 || err.status === 403){
                         toaster.pop('error', 'Login Failure!', 'Username and password mismatch!');
                     }else{
                         toaster.pop('error', 'Login Failure!', 'Other Error!');
@@ -42,7 +42,7 @@ foundITApp.controller('loginController', ['$scope', '$location', 'toaster', 'aut
                 });
 
                 // the short cut todo: remove after dev
-                $scope.enterNext();
+                // $scope.enterNext();
             };
 
             $scope.enterNext = function () {
