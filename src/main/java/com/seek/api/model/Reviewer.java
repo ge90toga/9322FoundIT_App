@@ -15,6 +15,7 @@ public class Reviewer {
 
     @Id
     @Column(name = "id")
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Setter @Getter private Long id;
 

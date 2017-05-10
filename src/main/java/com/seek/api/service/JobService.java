@@ -23,7 +23,12 @@ public interface JobService {
 
     Job findJobByID(Long id);
 
-    List<Job> findJobByPublisherID(String publisherID);
+    /**
+     *
+     * @param publisher username.
+     * @return
+     */
+    List<Job> findJobByPublisher(String publisher);
 
     List<Job> findJobByName(String name);
 
@@ -47,6 +52,6 @@ public interface JobService {
 
     List<Review> findReviewByAppID(String appID);
 
-    List<ReviewDTO> findReviewComboByUserID(String userID);
+    List<ReviewDTO> findReviewComboByUserID(String username);
 
 }

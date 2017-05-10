@@ -49,8 +49,7 @@ public class ApplyController {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Application> addNewApplication(@RequestBody Application application) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        User user = userService.findUserByUsername(username).get();
-        application.setUserID(user.getId().toString());
+        application.setUserID(username);
         application.setEmail(username);
         jobService.addApplication(application);
         return new ResponseEntity<>(application, HttpStatus.CREATED);

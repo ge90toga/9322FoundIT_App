@@ -39,7 +39,7 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     private void testJobs() {
-        Job job1 = new Job("1", "Java Dev", "full-time", "Google", "hello", JobStatus.OPEN);
+        Job job1 = new Job("295046974@qq.com", "Java Dev", "full-time", "Google", "hello", JobStatus.OPEN);
         jobService.addJob(job1);
 //        Job job2 = new Job("Frank1", "Java Dev", "full-time", "Google", "hello", JobStatus.OPEN);
 //        jobService.addJob(job2);

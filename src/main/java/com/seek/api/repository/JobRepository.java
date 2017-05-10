@@ -10,6 +10,11 @@ import java.util.List;
  */
 public interface JobRepository extends JpaRepository<Job, Long> {
 
+    /**
+     *
+     * @param publisher username.
+     * @return
+     */
     List<Job> findByPublisher(String publisher);
 
     List<Job> findByTitleContaining(String title);

@@ -20,7 +20,7 @@ public class Job {
     @Setter @Getter private Long id;
 
     /**
-     * created manager id.
+     * created manager username.
      */
     @Column(name = "publisher")
     @Setter @Getter private String publisher;

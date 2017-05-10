@@ -5,6 +5,7 @@ import com.seek.api.model.*;
 import com.seek.api.repository.ApplicationRepository;
 import com.seek.api.repository.JobRepository;
 import com.seek.api.repository.ReviewRepository;
+import com.seek.api.repository.ReviewerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,12 +20,15 @@ public class JobServiceImpl implements JobService {
     private JobRepository jobRepository;
     private ApplicationRepository applicationRepository;
     private ReviewRepository reviewRepository;
+    private ReviewerRepository reviewerRepository;
 
     @Autowired
-    public JobServiceImpl(JobRepository jobRepository, ApplicationRepository applicationRepository, ReviewRepository reviewRepository){
+    public JobServiceImpl(JobRepository jobRepository, ApplicationRepository applicationRepository, ReviewRepository reviewRepository,
+                          ReviewerRepository reviewerRepository){
         this.jobRepository = jobRepository;
         this.applicationRepository = applicationRepository;
         this.reviewRepository = reviewRepository;
+        this.reviewerRepository = reviewerRepository;
     }
 
     @Override
@@ -58,8 +62,8 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public List<Job> findJobByPublisherID(String publisherID) {
-        return jobRepository.findByPublisher(publisherID);
+    public List<Job> findJobByPublisher(String publisher) {
+        return jobRepository.findByPublisher(publisher);
     }
 
     @Override
@@ -114,18 +118,24 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public List<ReviewDTO> findReviewComboByUserID(String userID) {
+    public List<ReviewDTO> findReviewComboByUserID(String username) {
         List<ReviewDTO> reviewDTOS = new ArrayList<>();
 
-        List<Job> jobs = findJobByPublisherID(userID);
-        if (jobs == null || jobs.isEmpty()) {
-            System.err.println("findReviewComboByUserID | job not found.");
+        List<Reviewer> reviewerList = reviewerRepository.findByUsername(username);
+
+        if (reviewerList == null || reviewerList.isEmpty()) {
+            System.err.println("findReviewComboByUserID | reviewer list not found.");
             return reviewDTOS;
         }
 
-        for (Job job : jobs) {
+        for (Reviewer reviewer : reviewerList) {
 
-            List<Application> applications = findApplicationByJobID(job.getId().toString());
+            if (reviewer.getJob() == null) {
+                System.err.println("findReviewComboByUserID | reviewer job is null.");
+                continue;
+            }
+
+            List<Application> applications = findApplicationByJobID(reviewer.getJob().getId().toString());
             if (applications == null || applications.isEmpty()) {
                 System.err.println("findReviewComboByUserID | application not found.");
                 return reviewDTOS;
@@ -133,8 +143,8 @@ public class JobServiceImpl implements JobService {
 
             for (Application application : applications) {
                 ReviewDTO reviewDTO = new ReviewDTO();
-                reviewDTO.setReviewerID(userID);
-                reviewDTO.setJobTitle(job.getTitle());
+                reviewDTO.setReviewerID(username);
+                reviewDTO.setJobTitle(reviewer.getJob().getTitle());
                 reviewDTO.setCv(application.getCv());
                 reviewDTO.setApplicantName(application.getEmail());
 

@@ -24,8 +24,11 @@ public class Review {
     @Setter @Getter private String jobID;
 
     @Column(name = "application_id")
-    @Setter @Getter private String applicationID;      // TODO link app.
+    @Setter @Getter private String applicationID;
 
+    /**
+     * reviewer username.
+     */
     @Column(name = "reviewer_id")
     @Setter @Getter private String reviewerID;
 
