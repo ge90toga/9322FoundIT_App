@@ -39,8 +39,8 @@ public class AdminController {
     @RequestMapping(value = "/review/combo", method = RequestMethod.GET)
     public ResponseEntity<?> getAllReviewCombo() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        User user = userService.findUserByUsername(username).get();
-        List<ReviewDTO> reviewDTOS = jobService.findReviewComboByUserID(user.getId().toString());
+//        User user = userService.findUserByUsername(username).get();
+        List<ReviewDTO> reviewDTOS = jobService.findReviewComboByUserID(username);
         return new ResponseEntity<>(reviewDTOS, HttpStatus.OK);
     }
 

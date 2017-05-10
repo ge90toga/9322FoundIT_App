@@ -24,6 +24,9 @@ public class Application {
     @Column(name = "job_id")
     @Setter @Getter private String jobID;
 
+    /**
+     * applicant username
+     */
     @Column(name = "user_id")
     @Setter @Getter private String userID;
 
