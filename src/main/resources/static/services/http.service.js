@@ -1,5 +1,5 @@
 // SERVICES
-foundITApp.service('httpService', function ($http) {
+foundITApp.service('httpService', function ($http, StorageService) {
     var self = {
         baseUrl: 'http://localhost:8080/',
         /**
@@ -11,10 +11,16 @@ foundITApp.service('httpService', function ($http) {
         getData: function (path, queryParams) {
             var url = self.baseUrl + path + self.__buildQueryStr(queryParams);
             //TODO: add x-auth header
+            var headers = {};
+            var token = StorageService.getAuthToken();
+            if (token) {
+                headers['x-auth-token'] = token;
+            }
             console.log('httpService::getData::url', url);
             return $http({
                 method: 'GET',
-                url: url
+                url: url,
+                headers: headers
             });
         },
 
@@ -26,10 +32,16 @@ foundITApp.service('httpService', function ($http) {
          */
         postData: function (path, payload) {
             var url = self.baseUrl + path;
+            var headers = {};
+            var token = StorageService.getAuthToken();
+            if (token) {
+                headers['x-auth-token'] = token;
+            }
             //TODO: add x-auth header
             console.log('httpService::postData::url', url);
             return $http({
                 method: 'POST',
+                headers: headers,
                 url: url,
                 data: payload
             });

@@ -29,9 +29,33 @@
                         </div>
 
                         <div class="form-group">
+                            <label>Type</label>
+                            <select class="form-control"
+                                    ng-model="data.form.type"
+                                    ng-options="option for option in data.jobTypes">
+                            </select>
+                        </div>
+
+                        <div class="form-group">
                             <label>Description</label>
                             <textarea ng-model="data.form.description" class="form-control" placeholder="Enter Page Body"></textarea>
                         </div>
+
+                        <!--<div class="form-group">-->
+                            <!--<label>First Reviewer</label>-->
+                            <!--<select class="form-control"-->
+                                    <!--ng-model="data.reviewer1"-->
+                                    <!--ng-options="option for option in data.reviewerList">-->
+                            <!--</select>-->
+                        <!--</div>-->
+
+                        <!--<div class="form-group">-->
+                            <!--<label>Second Reviewer</label>-->
+                            <!--<select class="form-control"-->
+                                    <!--ng-model="data.reviewer2"-->
+                                    <!--ng-options="option as for option in data.reviewerList">-->
+                            <!--</select>-->
+                        <!--</div>-->
 
                         <div class="pull-right">
                             <button type="submit" class="btn btn-default btn-success">Create</button>
