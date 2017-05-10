@@ -1,4 +1,5 @@
 <admin-header></admin-header>
+<toaster-container toaster-options="{'time-out': 1000}"></toaster-container>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -25,10 +26,7 @@
                     </div>
                     <div class="form-group">
                         <label>Status</label>
-                        <select class="form-control"
-                                ng-model="job.state" ng-disabled="!data.enableEditList[{{$index}}]"
-                                ng-options="option for option in data.jobStates">
-                        </select>
+                        <input class="form-control" ng-model="job.status" ng-disabled="true"/>
                     </div>
                     <div class="pull-right">
                         <button ng-click="editItem($index)" class="btn btn-default btn-success">Edit</button>

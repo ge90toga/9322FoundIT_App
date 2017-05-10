@@ -74,9 +74,9 @@ foundITApp.service('httpService', function ($http, StorageService) {
             if (token) {
                 headers['x-auth-token'] = token;
             }
-            console.log('httpService::postData::url', url);
+            console.log('httpService::deleteData::url', url);
             return $http({
-                method: 'PUT',
+                method: 'DELETE',
                 headers: headers,
                 url: url
             });

@@ -1,4 +1,4 @@
-// MODULE
+'use strict';
 var foundITApp = angular.module('foundITApp',
     [
         'ngRoute',
