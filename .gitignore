@@ -1,4 +1,5 @@
 /bin/
 /target/
-.idea/*
+/.idea/
 *.db
+/test/e2e-test/node_modules
