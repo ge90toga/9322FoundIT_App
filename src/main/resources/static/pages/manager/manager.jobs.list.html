@@ -61,43 +61,11 @@
                     </div>
                     <div class="form-group">
                         <label>Status</label>
-                        <input class="form-control" ng-model="job.state" ng-disabled="true"/>
+                        <input class="form-control" ng-model="job.status" ng-disabled="true"/>
                     </div>
                 </div>
             </div>
             <!--in review ends-->
-
-            <!--completed review -->
-            <div class="row">
-                <div class="col-md-12">
-                    <h3 class="page-header">My Completed Review Jobs</h3>
-                </div>
-            </div>
-            <div class="panel panel-default" ng-repeat="job in data.reviewCompleteJobs">
-                <div class="panel-body">
-                    <div class="form-group">
-                        <label>Job Title</label>
-                        <input ng-model="job.title" class="form-control" ng-disabled="true">
-                    </div>
-                    <div class="form-group">
-                        <label>Type</label>
-                        <input class="form-control" ng-model="job.type" ng-disabled="true"/>
-                    </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea ng-model="job.description" class="form-control"
-                                  placeholder="Enter Page Body" ng-disabled="true"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Status</label>
-                        <input class="form-control" ng-model="job.state" ng-disabled="true"/>
-                    </div>
-                    <div class="pull-right">
-                        <button class="btn btn-default btn-success">Send Invitation</button>
-                    </div>
-                </div>
-            </div>
-            <!--completed review ends -->
 
         </div>
     </div>

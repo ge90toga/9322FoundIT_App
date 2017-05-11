@@ -198,7 +198,7 @@ public class JobServiceImpl implements JobService {
                 applicationDTO.setJobID(job.getId().toString());
                 applicationDTO.setJobTitle(job.getTitle());
                 applicationDTO.setApplicationID(application.getId().toString());
-                applicationDTO.setApplicant(job.getPublisher());
+                applicationDTO.setApplicant(application.getEmail());
                 applicationDTO.setApplicationStatus(application.getStatus());
                 applicationDTOS.add(applicationDTO);
             }

@@ -14,6 +14,7 @@ foundITApp.controller('seekerSearchCtrl', function ($scope, seekerService, toast
             console.log('searching keyword', $scope.data.keyWord);
             seekerService.searchJobs($scope.data.keyWord).then(function success(jobList) {
                 console.log('search jobList', jobList);
+                $scope.data.jobList = [];
                 jobList.forEach(function (job) {
                     $scope.data.jobList.push(job);
                 });
