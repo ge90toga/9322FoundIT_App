@@ -42,6 +42,8 @@ public interface JobService {
 
     List<Application> findAllApplication();
 
+    List<Application> findApplicationByApplicant(String applicant);
+
     void addReview(Review review);
 
     void updateReview(Review review);
