@@ -50,10 +50,20 @@ foundITApp.controller('JobListCtrl', ['$scope', 'managerService',
 
         // classify jobs based on state
         $scope.classifyJobs = function (jobList) {
-            $scope.data.openJobs = _.pickBy(jobList, {status: 'OPEN'});
-            $scope.data.inReviewJobs = _.pickBy(jobList, {status: 'REVIEW_POCESSING'});
-            $scope.data.reviewCompleteJobs = _.pickBy(jobList, {status: 'REVIEW_COMPLETED'});
-            $scope.data.closedJobs = _.pickBy(jobList, {status: 'CLOSED'});
+            jobList.forEach(function (job) {
+                switch (job.status){
+                    case 'OPEN':
+                        $scope.data.openJobs.push(job);
+                        break;
+                    case 'REVIEW_POCESSING':
+                        $scope.data.inReviewJobs.push(job);
+                        break;
+                    case 'REVIEW_COMPLETED':
+                        $scope.data.reviewCompleteJobs.push(job);
+                    case 'CLOSED':
+                        $scope.data.closedJobs.push(job);
+                }
+            });
         };
 
         $scope.getJobList = function () {

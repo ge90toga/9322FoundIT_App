@@ -1,5 +1,5 @@
-foundITApp.controller('loginController', ['$scope', '$location', 'toaster', 'authService','$timeout',
-    function ($scope, $location, toaster, authService,$timeout) {
+foundITApp.controller('loginController', ['$scope', '$location', 'toaster', 'authService', '$timeout',
+    function ($scope, $location, toaster, authService, $timeout) {
         $scope.init = function () {
             $scope.data = {
                 form: {
@@ -30,13 +30,13 @@ foundITApp.controller('loginController', ['$scope', '$location', 'toaster', 'aut
                     toaster.pop('success', 'Login Success!', '');
                     $timeout(function () {
                         $scope.enterNext();
-                    },1000);
+                    }, 1000);
                 }, function err(err) {
                     // unsuccessful login
                     console.log('login error', err);
-                    if(err.status === 401 || err.status === 403){
+                    if (err.status === 401 || err.status === 403) {
                         toaster.pop('error', 'Login Failure!', 'Username and password mismatch!');
-                    }else{
+                    } else {
                         toaster.pop('error', 'Login Failure!', 'Other Error!');
                     }
                 });
