@@ -69,4 +69,11 @@ public class ApplyController {
         return new ResponseEntity<>(applicationDTOS, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/my", method = RequestMethod.GET)
+    public ResponseEntity<?> getMyApplications() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        List<Application> applications =  jobService.findApplicationByApplicant(username);
+        return new ResponseEntity<>(applications, HttpStatus.OK);
+    }
+
 }

@@ -99,6 +99,11 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
+    public List<Application> findApplicationByApplicant(String applicant) {
+        return applicationRepository.findByUserID(applicant);
+    }
+
+    @Override
     public void addReview(Review review) {
         reviewRepository.save(review);
     }
