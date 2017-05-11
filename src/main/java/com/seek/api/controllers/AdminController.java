@@ -1,8 +1,8 @@
 package com.seek.api.controllers;
 
+import com.seek.api.dto.PollDTO;
 import com.seek.api.dto.ReviewDTO;
-import com.seek.api.model.Review;
-import com.seek.api.model.User;
+import com.seek.api.model.*;
 import com.seek.api.repository.UserRepository;
 import com.seek.api.security.JwtTokenHandler;
 import com.seek.api.service.JobService;
@@ -57,6 +57,30 @@ public class AdminController {
         review.setReviewerID(username);
         review.setReviewerName(user.getName());
         jobService.addReview(review);
+
+        // update application status & job status.
+        Job job = jobService.findJobByID(Long.parseLong(review.getJobID()));
+        if (job != null && job.getStatus() == JobStatus.OPEN) {
+            job.setStatus(JobStatus.REVIEW_POCESSING);
+            jobService.updateJob(job);
+        }
+
+        Application application = jobService.findApplicationByID(Long.parseLong(review.getApplicationID()));
+        if (application != null) {
+            // review approved.
+            if (review.isResult()) {
+
+                if (application.getStatus() == ApplicationStatus.WAITING) {
+                    application.setStatus(ApplicationStatus.REVIEWING);
+                } else if (application.getStatus() == ApplicationStatus.REVIEWING) {
+                    application.setStatus(ApplicationStatus.APPROVED);
+                }
+            // review declined.
+            } else {
+                application.setStatus(ApplicationStatus.DECLINED);
+            }
+            jobService.updateApplication(application);
+        }
         return new ResponseEntity<>(review, HttpStatus.CREATED);
     }
 
@@ -65,5 +89,30 @@ public class AdminController {
         jobService.updateReview(review);
         return new ResponseEntity<>(review, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/poll", method = RequestMethod.POST)
+    public ResponseEntity<?> organizePoll(@RequestBody PollDTO pollDTO) {
+        String pollLink = "";
+        // step 1: update job status & app status.
+        Job job = jobService.findJobByID(Long.parseLong(pollDTO.getJobID()));
+        if (job != null) {
+            job.setStatus(JobStatus.REVIEW_COMPLETED);
+            jobService.updateJob(job);
+        }
+
+        for (String appID : pollDTO.getApplicationIDs()) {
+            Application application = jobService.findApplicationByID(Long.parseLong(appID));
+            if (application != null) {
+                application.setStatus(ApplicationStatus.INVITATION_SEND);
+                jobService.updateApplication(application);
+            }
+
+        }
+
+        // step 2: send poll & retrieve poll link.
+
+        return new ResponseEntity<>(pollLink, HttpStatus.OK);
+    }
+
 
 }

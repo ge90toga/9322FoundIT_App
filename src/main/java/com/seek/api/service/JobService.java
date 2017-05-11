@@ -4,10 +4,7 @@ package com.seek.api.service;
 import com.seek.api.dto.ApplicationDTO;
 import com.seek.api.dto.ReviewDTO;
 import com.seek.api.dto.UserDTO;
-import com.seek.api.model.Application;
-import com.seek.api.model.Job;
-import com.seek.api.model.Review;
-import com.seek.api.model.User;
+import com.seek.api.model.*;
 
 import java.util.List;
 import java.util.Optional;
