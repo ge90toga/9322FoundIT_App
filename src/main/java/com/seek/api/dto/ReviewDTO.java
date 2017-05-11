@@ -25,7 +25,7 @@ public class ReviewDTO {
 
     @Setter @Getter private String cv;
 
-    @Setter @Getter private String applicantID;
+    @Setter @Getter private String applicationID;
 
     @Setter @Getter private String applicantName;
 
