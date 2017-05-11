@@ -16,8 +16,8 @@ public class PollDTO {
 
     @Setter @Getter List<String> applicantIDs;
 
-    @Setter @Getter String pollTitle;
+    @Setter @Getter String title;
 
-    @Setter @Getter List<String> pollOptions;
+    @Setter @Getter List<VoteDTO> votes;
 
 }
