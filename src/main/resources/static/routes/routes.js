@@ -26,7 +26,8 @@ foundITApp.config(function ($routeProvider) {
 
         .when('/seeker/applist', {
             templateUrl: 'pages/seeker/seeker.application.html',
-            cache: false
+            cache: false,
+            controller: 'seekerListCtrl'
         })
 
         .when('/seeker/vote', {

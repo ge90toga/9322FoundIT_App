@@ -13,8 +13,16 @@ foundITApp.service('reviewerService', function ($q, httpService) {
             return d.promise;
         },
 
-        createReview : function () {
-
+        createReview : function (review) {
+            var d = $q.defer();
+            httpService.postData('api/admin/review', review).then(function success(response) {
+                console.log('reviewerService postReview response', response);
+                d.resolve(response.data);
+            }, function error(err) {
+                console.log('reviewerService::postReview error', err);
+                d.reject(err);
+            });
+            return d.promise;
         },
 
         upDateReview: function () {

@@ -1,4 +1,4 @@
-foundITApp.controller('seekerSearchCtrl', function ($scope, seekerService, toaster) {
+foundITApp.controller('seekerSearchCtrl', function ($scope, seekerService, toaster, $location,$timeout) {
     $scope.init = function () {
         console.log('seeker search ctrl');
         $scope.data = {
@@ -14,7 +14,9 @@ foundITApp.controller('seekerSearchCtrl', function ($scope, seekerService, toast
             console.log('searching keyword', $scope.data.keyWord);
             seekerService.searchJobs($scope.data.keyWord).then(function success(jobList) {
                 console.log('search jobList', jobList);
-                $scope.data.jobList = _.pickBy(jobList, {status: 'OPEN'});
+                jobList.forEach(function (job) {
+                    $scope.data.jobList.push(job);
+                });
                 console.log('filtered jobList', $scope.data.jobList);
             }, function error(err) {
                 console.log('search error', err);
@@ -28,7 +30,15 @@ foundITApp.controller('seekerSearchCtrl', function ($scope, seekerService, toast
             cv: $scope.data.cv
         };
         console.log('job apply data:', data);
-
+        seekerService.applyJob(data).then(function success() {
+            toaster.pop('success', 'Success!', 'Your application has been submitted');
+            $timeout(function () {
+                $location.path('/seeker/applist');
+            }, 1000);
+        }, function error(err) {
+            toaster.pop('error', 'seeker apply error', err);
+            console.log('seeker apply err', err);
+        })
     };
 
     $scope.init();
