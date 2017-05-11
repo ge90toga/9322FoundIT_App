@@ -28,7 +28,7 @@ foundITApp.controller('reviewerCtrl', function ($scope, toaster, reviewerService
 
     $scope.createReview = function (idx) {
         var reviewToPost = _.pick($scope.data.toReviewList[idx],
-            ['applicantID', 'content', 'jobID', 'result']);
+            ['applicationID', 'content', 'jobID', 'result']);
         console.log('reviewToPost::', reviewToPost);
         // reviewerService
 
