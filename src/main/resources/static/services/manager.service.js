@@ -63,7 +63,7 @@ foundITApp.service('managerService', function ($q, httpService) {
         getJobApplyCombo: function (jobID) {
             var d = $q.defer();
             console.log('get getJobApplyCombo jid', jobID);
-            // api/apply/combo
+            // api/apply/combo todo: replace back to api
             httpService.getData('mock/invite.json').then(function success(response) {
                 console.log('managerService getJobApplyCombo response data', response.data);
                 console.log(response.data);
