@@ -1,0 +1,50 @@
+[
+  {
+    "publisher": "admin_1@gmail.com",
+    "jobID": "1",
+    "jobTitle": "JOB1 Dev",
+    "applicationID": "1",
+    "applicant": "user_1@gmail.com",
+    "applicationStatus": "APPROVED"
+  },
+  {
+    "publisher": "admin_1@gmail.com",
+    "jobID": "1",
+    "jobTitle": "JOB1 Dev",
+    "applicationID": "2",
+    "applicant": "user_2@gmail.com",
+    "applicationStatus": "APPROVED"
+  },
+  {
+    "publisher": "admin_1@gmail.com",
+    "jobID": "1",
+    "jobTitle": "JOB1 Dev",
+    "applicationID": "3",
+    "applicant": "user_3@gmail.com",
+    "applicationStatus": "WAITING"
+  },
+  {
+    "publisher": "admin_1@gmail.com",
+    "jobID": "2",
+    "jobTitle": "JOB2 Dev",
+    "applicationID": "4",
+    "applicant": "user_4@gmail.com",
+    "applicationStatus": "WAITING"
+  },
+  {
+    "publisher": "admin_1@gmail.com",
+    "jobID": "2",
+    "jobTitle": "JOB2 Dev",
+    "applicationID": "5",
+    "applicant": "user_5@gmail.com",
+    "applicationStatus": "WAITING"
+  },
+  {
+    "publisher": "admin_1@gmail.com",
+    "jobID": "2",
+    "jobTitle": "JOB2 Dev",
+    "applicationID": "6",
+    "applicant": "user_6@gmail.com",
+    "applicationStatus": "WAITING"
+  }
+]

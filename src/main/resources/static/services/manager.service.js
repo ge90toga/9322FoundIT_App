@@ -58,6 +58,47 @@ foundITApp.service('managerService', function ($q, httpService) {
                 d.reject(err);
             });
             return d.promise;
+        },
+
+        getJobApplyCombo: function (jobID) {
+            var d = $q.defer();
+            console.log('get getJobApplyCombo jid', jobID);
+            // api/apply/combo
+            httpService.getData('mock/invite.json').then(function success(response) {
+                console.log('managerService getJobApplyCombo response data', response.data);
+                console.log(response.data);
+                var approvedJobs = [];
+                response.data.forEach(function (item) {
+                    //console.log(item.applicationStatus);
+                    if (item.applicationStatus === 'APPROVED' && jobID == item.jobID) {
+                        approvedJobs.push(item);
+                    }
+                });
+                console.log('approved jobs', approvedJobs);
+                // self.__hello();
+                var finaInvite = null;
+                approvedJobs.forEach(function (approvedJob) {
+                    if (!finaInvite) {
+                        finaInvite = {
+                            jobID: approvedJob.jobID,
+                            jobTitle: approvedJob.jobTitle,
+                            applicants: [approvedJob.applicant]
+                        };
+                    } else {
+                        finaInvite.applicants.push(approvedJob.applicant);
+                    }
+                });
+                console.log('final list', finaInvite);
+                d.resolve(finaInvite);
+            }, function error(err) {
+                console.log('managerService::getJobApplyCombo Error', err);
+                d.reject(err);
+            });
+            return d.promise;
+        },
+
+        __hello: function () {
+            console.log('hello');
         }
 
     };

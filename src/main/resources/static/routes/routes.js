@@ -40,15 +40,15 @@ foundITApp.config(function ($routeProvider) {
             controller: 'registerController'
         })
 
-        .when('/forecast', {
-            templateUrl: 'pages/forecast.htm',
-            controller: 'forecastController'
-        })
-
-        .when('/forecast/:days', {
-            templateUrl: 'pages/forecast.htm',
-            controller: 'forecastController'
-        })
+        // .when('/forecast', {
+        //     templateUrl: 'pages/forecast.htm',
+        //     controller: 'forecastController'
+        // })
+        //
+        // .when('/forecast/:days', {
+        //     templateUrl: 'pages/forecast.htm',
+        //     controller: 'forecastController'
+        // })
 
         .when('/manager/jobs/create', {
             templateUrl: 'pages/manager/manager.jobs.create.html',
@@ -63,11 +63,14 @@ foundITApp.config(function ($routeProvider) {
         })
 
         .when('/manager/reviews/', {
-            templateUrl: 'pages/manager/manager.reviews.html'
+            templateUrl: 'pages/manager/manager.reviews.html',
+            cache: false
         })
 
-        .when('/manager/polls/', {
-            templateUrl: 'pages/manager/manager.polls.html'
+        .when('/manager/polls/:jobID', {
+            templateUrl: 'pages/manager/manager.polls.html',
+            cache: false,
+            controller: 'managerPollCtrl'
         });
 
 });

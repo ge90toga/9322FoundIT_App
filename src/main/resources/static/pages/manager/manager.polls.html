@@ -4,7 +4,7 @@
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="page-header">My Ongoing Polls</h3>
+                    <h3 class="page-header">Creating Interview Poll</h3>
                 </div>
             </div>
             <!--opening jobs-->
@@ -14,43 +14,35 @@
                         <div class="panel-body">
                             <div class="form-group">
                                 <label>Poll Title</label>
-                                <p type="text" class="form-control" ng-disabled="true">JS Interview</p>
+                                <p class="form-control">{{data.interviewToVote.jobTitle}}</p>
                             </div>
 
+                            <!-- list of candidates -->
+                            <label>Successful Candidates:</label>
                             <ul class="list-group">
-                                <li class="list-group-item">
-                                    <input ng-disabled="true" id="radio1" name="radio" type="radio" class="custom-control-input">
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-description">Recommend this candidate</span>
-                                    <span class="badge">14</span>
-                                    Cras justo odio
+                                <li ng-repeat="person in data.interviewToVote.applicants" class="list-group-item">
+                                    {{person}}
                                 </li>
-                                <li class="list-group-item">
-                                    <input ng-disabled="true" id="radio2" name="radio" type="radio" class="custom-control-input">
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-description">Recommend this candidate</span>
-                                    <span class="badge">14</span>
-                                    Cras justo odio
+                            </ul>
+
+                            <!-- list of options-->
+                            <label>Options:</label>
+                            <ul class="list-group">
+                                <li ng-repeat="op in data.voteOptions" class="list-group-item">
+                                    <input type="text" ng-model="op.value" class="form-control"
+                                           placeholder="Please add voting options e,g. 07/05/2017, 2032 Kingsford">
                                 </li>
                             </ul>
 
                             <div class="pull-right">
-                                <button type="submit" class="btn btn-default btn-success">Update</button>
-                                <button class="btn btn-default btn-warning">Confirm</button>
-                                <button type="submit" class="btn btn-default btn-danger">Cancel</button>
+                                <button ng-click="addOption()" class="btn btn-default btn-warning">Add Option</button>
+                                <button ng-click="sendInvitation()" class="btn btn-default btn-warning">Confirm And Notify Candidates</button>
                             </div>
                         </div>
                     </div>
                     <!--opening end-->
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <h3 class="page-header">My Finished Polls</h3>
-                </div>
-            </div>
-
 
         </div>
     </div>
