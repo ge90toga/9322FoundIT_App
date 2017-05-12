@@ -165,11 +165,12 @@ public class JobServiceImpl implements JobService {
                 }
 
                 for (Review review : reviews) {
-                    reviewDTO.setReviewID(review.getId().toString());
-                    reviewDTO.setContent(review.getContent());
-                    reviewDTO.setResult(review.isResult());
-                    reviewDTOS.add(reviewDTO);
-                    continue;
+                    if (review.getReviewerID().equals(username)) {
+                        reviewDTO.setReviewID(review.getId().toString());
+                        reviewDTO.setContent(review.getContent());
+                        reviewDTO.setResult(review.isResult());
+                        reviewDTOS.add(reviewDTO);
+                    }
                 }
 
             }
