@@ -41,7 +41,22 @@ foundITApp.service('seekerService', function ($q, httpService) {
             var d = $q.defer();
             httpService.getData('api/apply/my').then(function success(response) {
                 console.log('seekerService checkMyApplication response', response);
-                d.resolve(response.data);
+                var appInfos = response.data;
+                if (appInfos && appInfos.length > 0) {
+                    console.log('fire promise all to get job by jobID');
+                    self.getJobsByIds(appInfos).then(function (jobInfosResponse) {
+                        console.log('job infos', jobInfosResponse);
+                        for (var index = 0; index < appInfos.length; ++index) {
+                            appInfos[index].jobTitle = jobInfosResponse[index].data.title;
+                        }
+                        console.log('added title to application', appInfos);
+                        d.resolve(appInfos);
+                    }, function (err) {
+                        d.reject(err);
+                    });
+                } else {
+                    d.resolve([]);
+                }
             }, function error(err) {
                 console.log('seekerService:: error checkMyApplication', err);
                 d.reject(err);
@@ -59,6 +74,16 @@ foundITApp.service('seekerService', function ($q, httpService) {
                 d.reject(err);
             });
             return d.promise;
+        },
+
+        getJobsByIds: function (appInfos) {
+            var getJobPromises = [];
+            angular.forEach(appInfos, function (app) {
+                console.log('jbid', app.jobID);
+                var getSingleJob = httpService.getData('api/jobs/' + app.jobID);
+                getJobPromises.push(getSingleJob);
+            });
+            return $q.all(getJobPromises);
         }
     };
     return self;

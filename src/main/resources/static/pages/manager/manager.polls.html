@@ -4,23 +4,23 @@
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="page-header">Creating Interview Poll</h3>
+                    <h3 class="page-header">Creating Interview Polls</h3>
                 </div>
             </div>
             <!--opening jobs-->
-            <div class="row">
+            <div ng-repeat="invite in data.jobInviteList" class="row">
                 <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="form-group">
                                 <label>Poll Title</label>
-                                <p class="form-control">{{data.interviewToVote.jobTitle}}</p>
+                                <p class="form-control">{{invite.jobTitle}}</p>
                             </div>
 
                             <!-- list of candidates -->
                             <label>Successful Candidates:</label>
                             <ul class="list-group">
-                                <li ng-repeat="person in data.interviewToVote.applicants" class="list-group-item">
+                                <li ng-repeat="person in invite.applicants" class="list-group-item">
                                     {{person}}
                                 </li>
                             </ul>
@@ -28,15 +28,15 @@
                             <!-- list of options-->
                             <label>Options:</label>
                             <ul class="list-group">
-                                <li ng-repeat="op in data.voteOptions" class="list-group-item">
+                                <li ng-repeat="op in invite.voteOptions" class="list-group-item">
                                     <input type="text" ng-model="op.value" class="form-control"
                                            placeholder="Please add voting options e,g. 07/05/2017, 2032 Kingsford">
                                 </li>
                             </ul>
 
                             <div class="pull-right">
-                                <button ng-click="addOption()" class="btn btn-default btn-warning">Add Option</button>
-                                <button ng-click="sendInvitation()" class="btn btn-default btn-warning">Confirm And Notify Candidates</button>
+                                <button ng-click="addOption($index)" class="btn btn-default btn-warning">Add Option</button>
+                                <button ng-click="sendInvitation($index)" class="btn btn-default btn-warning">Confirm And Notify Candidates</button>
                             </div>
                         </div>
                     </div>

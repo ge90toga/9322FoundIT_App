@@ -2,11 +2,6 @@
 foundITApp.config(function ($routeProvider) {
     $routeProvider
 
-    // .when('/', {
-    //     templateUrl: 'pages/home.htm',
-    //     controller: 'homeController'
-    // })
-
         .when('/', {
             templateUrl: 'pages/login/login.html',
             controller: 'loginController'
@@ -27,6 +22,12 @@ foundITApp.config(function ($routeProvider) {
         .when('/seeker/applist', {
             templateUrl: 'pages/seeker/seeker.application.html',
             cache: false,
+            controller: 'seekerAppListCtrl'
+        })
+
+        .when('/seeker/joblist', {
+            templateUrl: 'pages/seeker/seeker.joblist.html',
+            cache: false,
             controller: 'seekerListCtrl'
         })
 
@@ -39,16 +40,6 @@ foundITApp.config(function ($routeProvider) {
             templateUrl: 'pages/register/register.html',
             controller: 'registerController'
         })
-
-        // .when('/forecast', {
-        //     templateUrl: 'pages/forecast.htm',
-        //     controller: 'forecastController'
-        // })
-        //
-        // .when('/forecast/:days', {
-        //     templateUrl: 'pages/forecast.htm',
-        //     controller: 'forecastController'
-        // })
 
         .when('/manager/jobs/create', {
             templateUrl: 'pages/manager/manager.jobs.create.html',
@@ -67,7 +58,7 @@ foundITApp.config(function ($routeProvider) {
             cache: false
         })
 
-        .when('/manager/polls/:jobID', {
+        .when('/manager/polls/', {
             templateUrl: 'pages/manager/manager.polls.html',
             cache: false,
             controller: 'managerPollCtrl'

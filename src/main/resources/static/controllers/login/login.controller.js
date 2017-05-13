@@ -1,5 +1,5 @@
-foundITApp.controller('loginController', ['$scope', '$location', 'toaster', 'authService', '$timeout',
-    function ($scope, $location, toaster, authService, $timeout) {
+foundITApp.controller('loginController', ['$scope', '$location', 'toaster', 'authService', '$timeout', '_',
+    function ($scope, $location, toaster, authService, $timeout, _) {
         $scope.init = function () {
             $scope.data = {
                 form: {

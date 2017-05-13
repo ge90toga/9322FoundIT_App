@@ -8,9 +8,17 @@ var foundITApp = angular.module('foundITApp',
     ]
 );
 
+function LodashFactory($window) {
+    if(!$window._){
+        // If lodash is not available you can now provide a
+        // mock service, try to load it from somewhere else,
+        // redirect the user to a dedicated error page, ...
+    }
+    return $window._;
+}
 
-// CONTANT
+// Define dependencies
+LodashFactory.$inject = ['$window'];
 
-var FoundApp_JOB_SEEKER = 'JOB_SEEKER';
-var FoundApp_MANAGER= 'MANAGER';
-var FoundApp_REVIEWER = 'REVIEWER';
+// Register factory
+foundITApp.factory('_', LodashFactory);

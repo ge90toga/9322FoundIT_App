@@ -1,6 +1,6 @@
-foundITApp.controller('seekerListCtrl', function ($scope, seekerService, toaster, $timeout) {
+foundITApp.controller('seekerAppListCtrl', function ($scope, seekerService, toaster, $timeout, _) {
     $scope.init = function () {
-        console.log('seekerListCtrl init');
+        console.log('seekerAppListCtrl init');
         $scope.data = {};
         $scope.refresh();
     };

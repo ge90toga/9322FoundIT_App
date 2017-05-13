@@ -1,4 +1,4 @@
-foundITApp.controller('registerController', function ($scope, $location, authService, toaster, $timeout) {
+foundITApp.controller('registerController', function ($scope, $location, authService, toaster, $timeout, _) {
     $scope.init = function () {
         $scope.data = {
             form: {

@@ -60,36 +60,41 @@ foundITApp.service('managerService', function ($q, httpService) {
             return d.promise;
         },
 
-        getJobApplyCombo: function (jobID) {
+        getJobApplyCombo: function () {
             var d = $q.defer();
-            console.log('get getJobApplyCombo jid', jobID);
             // api/apply/combo todo: replace back to api
-            httpService.getData('mock/invite.json').then(function success(response) {
+            httpService.getData('api/apply/combo').then(function success(response) {
                 console.log('managerService getJobApplyCombo response data', response.data);
                 console.log(response.data);
-                var approvedJobs = [];
+                var approvedApps = [];
                 response.data.forEach(function (item) {
                     //console.log(item.applicationStatus);
-                    if (item.applicationStatus === 'APPROVED' && jobID == item.jobID) {
-                        approvedJobs.push(item);
+                    if (item.jobStatus === 'REVIEW_PROCESSING' &&
+                        item.applicationStatus === 'APPROVED') {
+                        approvedApps.push(item);
                     }
                 });
-                console.log('approved jobs', approvedJobs);
+                console.log('approved apps', approvedApps);
                 // self.__hello();
-                var finaInvite = null;
-                approvedJobs.forEach(function (approvedJob) {
-                    if (!finaInvite) {
-                        finaInvite = {
-                            jobID: approvedJob.jobID,
-                            jobTitle: approvedJob.jobTitle,
-                            applicants: [approvedJob.applicant]
-                        };
+                var finalInviteList = [];
+                approvedApps.forEach(function (approvedJob) {
+                    var findInvite = self.__findInviteItem(finalInviteList, approvedJob.jobID);
+                    if (!findInvite) {
+                        finalInviteList.push(
+                            {
+                                jobID: approvedJob.jobID,
+                                jobTitle: approvedJob.jobTitle,
+                                applicants: [approvedJob.applicant],
+                                applicationList: [approvedJob.applicationID]
+                            }
+                        )
                     } else {
-                        finaInvite.applicants.push(approvedJob.applicant);
+                        findInvite.applicants.push(approvedJob.applicant);
+                        findInvite.applicationList.push(approvedJob.applicationID);
                     }
                 });
-                console.log('final list', finaInvite);
-                d.resolve(finaInvite);
+                console.log('parsed invite list:', finalInviteList);
+                d.resolve(finalInviteList);
             }, function error(err) {
                 console.log('managerService::getJobApplyCombo Error', err);
                 d.reject(err);
@@ -97,8 +102,13 @@ foundITApp.service('managerService', function ($q, httpService) {
             return d.promise;
         },
 
-        __hello: function () {
-            console.log('hello');
+        __findInviteItem: function (myFinalList, jobID) {
+            for (var myFinalItem of myFinalList) {
+                if (myFinalItem.jobID === jobID) {
+                    return myFinalItem;
+                }
+            }
+            return null;
         }
 
     };
