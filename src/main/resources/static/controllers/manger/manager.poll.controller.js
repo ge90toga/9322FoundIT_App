@@ -25,13 +25,24 @@ foundITApp.controller('managerPollCtrl', ['$scope', 'managerService',
                 options.push(vote.value);
             }
             var postData = angular.copy($scope.data.jobInviteList[idx]);
-            postData.pollTitle = postData.jobTitle;
-            postData.participants = postData.applicants;
-            postData.options = options;
+            postData.title = postData.jobTitle;
+            postData.applicantIDs = postData.applicants;
+            postData.pollOptions = options;
+            postData.applicationIDs = postData.applicationList;
+
             delete postData.jobTitle;
             delete postData.applicants;
             delete postData.voteOptions;
+            delete  postData.applicationList;
             console.log('postVoteData', JSON.stringify(postData, null, 2));
+
+            managerService.createPoll(postData).then(function (res) {
+                console.log('poll creation response', res);
+                toaster.pop('success', 'Poll created', '');
+            }, function (err) {
+                console.log('poll error in creation');
+                toaster.pop('error', 'Poll creation error', '');
+            })
         };
 
         $scope.injectOptionList = function () {

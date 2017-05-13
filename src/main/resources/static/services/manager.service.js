@@ -109,8 +109,19 @@ foundITApp.service('managerService', function ($q, httpService) {
                 }
             }
             return null;
-        }
+        },
 
+        createPoll: function (poll) {
+            var d = $q.defer();
+            httpService.postData('api/admin/poll', poll).then(function success(response) {
+                console.log('reviewerService poll response', response);
+                d.resolve(response.data);
+            }, function error(err) {
+                console.log('reviewerService::poll error', err);
+                d.reject(err);
+            });
+            return d.promise;
+        }
     };
     return self;
 });
