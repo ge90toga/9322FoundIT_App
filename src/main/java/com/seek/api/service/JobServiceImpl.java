@@ -156,22 +156,33 @@ public class JobServiceImpl implements JobService {
                 reviewDTO.setApplicationID(application.getId().toString());
                 reviewDTO.setApplicantName(application.getEmail());
 
-                List<Review> reviews = findReviewByAppID(application.getId().toString());
+//                List<Review> reviews = findReviewByAppID(application.getId().toString());
+                Review review = reviewRepository.findByApplicationIDAndReviewerID(application.getId().toString(), username);
 
-                if (reviews == null || reviews.isEmpty()) {
+                if (review == null) {
                     System.err.println("findReviewComboByUserID | review not found.");
                     reviewDTOS.add(reviewDTO);
-                    continue;
+                } else {
+                    reviewDTO.setReviewID(review.getId().toString());
+                    reviewDTO.setContent(review.getContent());
+                    reviewDTO.setResult(review.isResult());
+                    reviewDTOS.add(reviewDTO);
                 }
 
-                for (Review review : reviews) {
-                    if (review.getReviewerID().equals(username)) {
-                        reviewDTO.setReviewID(review.getId().toString());
-                        reviewDTO.setContent(review.getContent());
-                        reviewDTO.setResult(review.isResult());
-                        reviewDTOS.add(reviewDTO);
-                    }
-                }
+//                if (reviews == null || reviews.isEmpty()) {
+//                    System.err.println("findReviewComboByUserID | review not found.");
+//                    reviewDTOS.add(reviewDTO);
+//                    continue;
+//                }
+//
+//                for (Review review : reviews) {
+//                    if (review.getReviewerID().equals(username)) {
+//                        reviewDTO.setReviewID(review.getId().toString());
+//                        reviewDTO.setContent(review.getContent());
+//                        reviewDTO.setResult(review.isResult());
+//                        reviewDTOS.add(reviewDTO);
+//                    }
+//                }
 
             }
 

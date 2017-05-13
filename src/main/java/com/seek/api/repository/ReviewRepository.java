@@ -12,4 +12,6 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     List<Review> findByApplicationID(String applicationID);
 
+    Review findByApplicationIDAndReviewerID(String applicationID, String reviewerID);
+
 }
