@@ -35,9 +35,18 @@
                                 </li>
                             </ul>
 
+                            <div ng-if="invite.pollUrl" class="form-group">
+                                <label>Poll Url:</label>
+                                <p class="form-control">Please not the following link {{invite.pollUrl}}</p>
+                            </div>
+
+
                             <div class="pull-right">
-                                <button ng-click="addOption($index)" class="btn btn-default btn-warning">Add Option</button>
-                                <button ng-click="sendInvitation($index)" class="btn btn-default btn-warning">Confirm And Notify Candidates</button>
+                                <button ng-if="!(invite.pollUrl)" ng-click="addOption($index)" class="btn btn-default btn-warning">Add Option
+                                </button>
+                                <button ng-if="!(invite.pollUrl)" ng-click="sendInvitation($index)" class="btn btn-default btn-warning">Confirm
+                                    And Notify Candidates
+                                </button>
                             </div>
                         </div>
                     </div>

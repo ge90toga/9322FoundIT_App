@@ -12,7 +12,7 @@ foundITApp.controller('loginController', ['$scope', '$location', 'toaster', 'aut
                 roleMap: {
                     'Job Seeker': 'ROLE_USER',
                     'Manager': 'ROLE_ADMIN',
-                    'Reviewer': 'ROLE_ADMIN'
+                    'Reviewer': 'ROLE_REVIEWER'
                 }
             };
             // deal with selector

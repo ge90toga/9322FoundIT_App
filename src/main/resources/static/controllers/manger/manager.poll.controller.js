@@ -1,5 +1,5 @@
 foundITApp.controller('managerPollCtrl', ['$scope', 'managerService',
-    'toaster', function ($scope, managerService, toaster) {
+    'toaster', '$location', function ($scope, managerService, toaster, $location) {
         $scope.init = function () {
             $scope.data = {
                 jobInviteList: [],
@@ -38,6 +38,7 @@ foundITApp.controller('managerPollCtrl', ['$scope', 'managerService',
 
             managerService.createPoll(postData).then(function (res) {
                 console.log('poll creation response', res);
+                $scope.data.jobInviteList[idx].pollUrl = res;
                 toaster.pop('success', 'Poll created', '');
             }, function (err) {
                 console.log('poll error in creation');

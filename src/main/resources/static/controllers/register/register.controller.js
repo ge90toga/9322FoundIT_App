@@ -1,5 +1,6 @@
 foundITApp.controller('registerController', function ($scope, $location, authService, toaster, $timeout, _) {
     $scope.init = function () {
+        authService.logout();
         $scope.data = {
             form: {
                 name: '',
@@ -12,7 +13,7 @@ foundITApp.controller('registerController', function ($scope, $location, authSer
             roleMap: {
                 'Job Seeker': 'ROLE_USER',
                 'Manager': 'ROLE_ADMIN',
-                'Reviewer': 'ROLE_ADMIN'
+                'Reviewer': 'ROLE_REVIEWER'
             }
         };
         $scope.data.form.type = $scope.data.loginTypes[0];

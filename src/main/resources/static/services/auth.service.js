@@ -36,7 +36,7 @@ foundITApp.service('authService', function ($q, httpService, StorageService, $lo
             console.log('authService::logout called!');
             StorageService.clear(); // clear
             console.log('token is ', StorageService.getAuthToken());
-            $location.path('/');
+            //$location.path('/');
         }
     };
     return self;
