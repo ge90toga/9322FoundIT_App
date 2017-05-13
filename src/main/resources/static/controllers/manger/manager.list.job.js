@@ -64,7 +64,7 @@ foundITApp.controller('JobListCtrl', ['$scope', 'managerService',
                         break;
                     case 'REVIEW_COMPLETED':
                         $scope.data.reviewCompleteJobs.push(job);
-                    case 'CLOSED':
+                    case 'INVITATION_SEND':
                         $scope.data.closedJobs.push(job);
                 }
             });

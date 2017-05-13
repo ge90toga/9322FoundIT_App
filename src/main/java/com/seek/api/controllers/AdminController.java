@@ -102,7 +102,7 @@ public class AdminController {
         // step 1: update job status & app status.
         Job job = jobService.findJobByID(Long.parseLong(pollDTO.getJobID()));
         if (job != null) {
-            job.setStatus(JobStatus.REVIEW_COMPLETED);
+            job.setStatus(JobStatus.INVITATION_SEND);
             jobService.updateJob(job);
         }
 
