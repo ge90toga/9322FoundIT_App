@@ -156,7 +156,6 @@ public class JobServiceImpl implements JobService {
                 reviewDTO.setApplicationID(application.getId().toString());
                 reviewDTO.setApplicantName(application.getEmail());
 
-//                List<Review> reviews = findReviewByAppID(application.getId().toString());
                 Review review = reviewRepository.findByApplicationIDAndReviewerID(application.getId().toString(), username);
 
                 if (review == null) {
@@ -168,21 +167,6 @@ public class JobServiceImpl implements JobService {
                     reviewDTO.setResult(review.isResult());
                     reviewDTOS.add(reviewDTO);
                 }
-
-//                if (reviews == null || reviews.isEmpty()) {
-//                    System.err.println("findReviewComboByUserID | review not found.");
-//                    reviewDTOS.add(reviewDTO);
-//                    continue;
-//                }
-//
-//                for (Review review : reviews) {
-//                    if (review.getReviewerID().equals(username)) {
-//                        reviewDTO.setReviewID(review.getId().toString());
-//                        reviewDTO.setContent(review.getContent());
-//                        reviewDTO.setResult(review.isResult());
-//                        reviewDTOS.add(reviewDTO);
-//                    }
-//                }
 
             }
 
@@ -214,6 +198,7 @@ public class JobServiceImpl implements JobService {
                 applicationDTO.setPublisher(username);
                 applicationDTO.setJobID(job.getId().toString());
                 applicationDTO.setJobTitle(job.getTitle());
+                applicationDTO.setJobStatus(job.getStatus());
                 applicationDTO.setApplicationID(application.getId().toString());
                 applicationDTO.setApplicant(application.getEmail());
                 applicationDTO.setApplicationStatus(application.getStatus());

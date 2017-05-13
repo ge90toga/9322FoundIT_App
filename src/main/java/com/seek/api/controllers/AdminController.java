@@ -3,8 +3,6 @@ package com.seek.api.controllers;
 import com.seek.api.dto.PollDTO;
 import com.seek.api.dto.ReviewDTO;
 import com.seek.api.model.*;
-import com.seek.api.repository.UserRepository;
-import com.seek.api.security.JwtTokenHandler;
 import com.seek.api.service.JobService;
 import com.seek.api.service.UserService;
 import io.swagger.annotations.ApiOperation;
@@ -61,7 +59,7 @@ public class AdminController {
         // update application status & job status.
         Job job = jobService.findJobByID(Long.parseLong(review.getJobID()));
         if (job != null && job.getStatus() == JobStatus.OPEN) {
-            job.setStatus(JobStatus.REVIEW_POCESSING);
+            job.setStatus(JobStatus.REVIEW_PROCESSING);
             jobService.updateJob(job);
         }
 

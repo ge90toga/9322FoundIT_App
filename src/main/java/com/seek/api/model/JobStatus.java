@@ -5,7 +5,7 @@ package com.seek.api.model;
  */
 public enum JobStatus {
     OPEN,
-    REVIEW_POCESSING,
+    REVIEW_PROCESSING,
     REVIEW_COMPLETED,
 //    INVITATION_SEND,
     CLOSED,
