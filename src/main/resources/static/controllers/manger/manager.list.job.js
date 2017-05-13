@@ -59,7 +59,7 @@ foundITApp.controller('JobListCtrl', ['$scope', 'managerService',
                     case 'OPEN':
                         $scope.data.openJobs.push(job);
                         break;
-                    case 'REVIEW_POCESSING':
+                    case 'REVIEW_PROCESSING':
                         $scope.data.inReviewJobs.push(job);
                         break;
                     case 'REVIEW_COMPLETED':

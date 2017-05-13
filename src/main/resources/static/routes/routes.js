@@ -58,7 +58,7 @@ foundITApp.config(function ($routeProvider) {
             cache: false
         })
 
-        .when('/manager/polls/:jobID', {
+        .when('/manager/polls/', {
             templateUrl: 'pages/manager/manager.polls.html',
             cache: false,
             controller: 'managerPollCtrl'

@@ -42,16 +42,21 @@ foundITApp.service('seekerService', function ($q, httpService) {
             httpService.getData('api/apply/my').then(function success(response) {
                 console.log('seekerService checkMyApplication response', response);
                 var appInfos = response.data;
-                // if (appInfos && appInfos > 0) {
-                //     self.getJobsByIds(appInfos).then(function (jobInfos) {
-                //         console.log('job infos', jobInfos);
-                //     }, function (err) {
-                //         d.reject(err);
-                //     })
-                // } else {
-                //     d.resolve([]);
-                // }
-                d.resolve(appInfos);
+                if (appInfos && appInfos.length > 0) {
+                    console.log('fire promise all to get job by jobID');
+                    self.getJobsByIds(appInfos).then(function (jobInfosResponse) {
+                        console.log('job infos', jobInfosResponse);
+                        for (var index = 0; index < appInfos.length; ++index) {
+                            appInfos[index].jobTitle = jobInfosResponse[index].data.title;
+                        }
+                        console.log('added title to application', appInfos);
+                        d.resolve(appInfos);
+                    }, function (err) {
+                        d.reject(err);
+                    });
+                } else {
+                    d.resolve([]);
+                }
             }, function error(err) {
                 console.log('seekerService:: error checkMyApplication', err);
                 d.reject(err);
@@ -71,9 +76,10 @@ foundITApp.service('seekerService', function ($q, httpService) {
             return d.promise;
         },
 
-        getJobsByIds: function (app) {
+        getJobsByIds: function (appInfos) {
             var getJobPromises = [];
-            angular.forEach(jobIds, function (app) {
+            angular.forEach(appInfos, function (app) {
+                console.log('jbid', app.jobID);
                 var getSingleJob = httpService.getData('api/jobs/' + app.jobID);
                 getJobPromises.push(getSingleJob);
             });

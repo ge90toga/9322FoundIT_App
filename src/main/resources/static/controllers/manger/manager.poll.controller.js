@@ -1,44 +1,51 @@
 foundITApp.controller('managerPollCtrl', ['$scope', 'managerService',
-    'toaster', '$routeParams', function ($scope, managerService, toaster, $routeParams) {
+    'toaster', function ($scope, managerService, toaster) {
         $scope.init = function () {
-            console.log(' $routeParams.jobID;', $routeParams.jobID);
             $scope.data = {
-                voteOptions: [{value: ''}],
+                jobInviteList: [],
+                // voteOptions: [{value: ''}],
                 interviewToVote: {},
             };
             $scope.getApplyJobCombo();
 
         };
 
-        $scope.addOption = function () {
-            var last = $scope.data.voteOptions.length - 1;
-            console.log('last', last);
-            if ($scope.data.voteOptions[last].value && last < 4) {
-                $scope.data.voteOptions.push({value: ''}); // add empty option if last option is ok
-                console.log('vote options', $scope.data.voteOptions);
+        $scope.addOption = function (idx) {
+            var last = $scope.data.jobInviteList[idx].voteOptions.length - 1;
+            console.log('last is', last);
+            if ($scope.data.jobInviteList[idx].voteOptions[last].value && last < 4) {
+                $scope.data.jobInviteList[idx].voteOptions.push({value: ''}); // add empty option if last option is ok
             }
         };
 
-        $scope.sendInvitation = function () {
-            console.log('vote options before processing', $scope.data.voteOptions);
+        $scope.sendInvitation = function (idx) {
+            console.log('invitation::before processing', $scope.data.jobInviteList[idx]);
             var options = [];
-            for (var vote of $scope.data.voteOptions) {
+            for (var vote of $scope.data.jobInviteList[idx].voteOptions) {
                 options.push(vote.value);
             }
-            var postData = angular.copy($scope.data.interviewToVote);
+            var postData = angular.copy($scope.data.jobInviteList[idx]);
             postData.pollTitle = postData.jobTitle;
             postData.participants = postData.applicants;
             postData.options = options;
             delete postData.jobTitle;
             delete postData.applicants;
+            delete postData.voteOptions;
             console.log('postVoteData', JSON.stringify(postData, null, 2));
         };
 
+        $scope.injectOptionList = function () {
+            $scope.data.jobInviteList.forEach(function (jobInvite) {
+                jobInvite.voteOptions = [{value: ''}];
+            });
+        };
+
         $scope.getApplyJobCombo = function () {
-            console.log('jobId', $routeParams.jobID);
-            managerService.getJobApplyCombo($routeParams.jobID).then(function success(jobInvite) {
-                console.log('interview to vote', jobInvite);
-                $scope.data.interviewToVote = jobInvite;
+            managerService.getJobApplyCombo().then(function success(jobInviteList) {
+                $scope.data.jobInviteList = jobInviteList;
+                $scope.injectOptionList();
+                console.log('jobInviteList In poll ctrl', $scope.data.jobInviteList);
+
             }, function error(err) {
                 console.log('getApplyJobCombo error', err);
             });

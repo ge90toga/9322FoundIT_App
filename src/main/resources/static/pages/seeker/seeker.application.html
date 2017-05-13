@@ -11,8 +11,8 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="form-group">
-                        <label>Job Title: </label>
-                        <span>{{job.jobTitle}}</span> <!-- todo:job title missing from api-->
+                        <label>Job ID: </label>
+                        <span>{{app.jobTitle}}</span>
                     </div>
 
                     <div class="form-group">
@@ -24,7 +24,7 @@
                     <div class="form-group">
                         <label>Status: </label>
                         <span>{{app.status}}</span>
-                        <span ng-if="app.status=='APPROVED'">A notification will be sent to you short ly</span>
+                        <span ng-if="app.status=='APPROVED'">(A notification will be sent to you shortly)</span>
                     </div>
 
                     <div class="pull-right">
