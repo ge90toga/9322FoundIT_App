@@ -1,6 +1,7 @@
 package com.seek.api.dto;
 
 import com.seek.api.model.ApplicationStatus;
+import com.seek.api.model.JobStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +18,8 @@ public class ApplicationDTO {
     @Setter @Getter private String jobID;
 
     @Setter @Getter private String jobTitle;
+
+    @Setter @Getter private JobStatus jobStatus;
 
     @Setter @Getter private String applicationID;
 
