@@ -346,48 +346,48 @@ let commonHeader;
     console.log(res.getBody('utf-8'));
 })();
 
-(function reviewer1ListReviews () {
-    console.log('reviewer1ListReviews()');
-    login = request('POST', baseUrl + apiLogin, {
-        json: {
-            email: users.r1.email,
-            password: users.r1.password
-        }
-    });
-    token = login.headers['x-auth-token'];
-    // console.log(token);
-    commonHeader = {
-        'x-auth-token': token,
-        'content-type': 'application/json'
-    };
-    // u1 apply job1
-    res = request('GET', baseUrl + reviewComboUrl, {
-        headers: commonHeader
-    });
-    console.log(JSON.stringify(JSON.parse(res.getBody('utf-8')),null,2));
-})();
-
-
-(function reviewer2ListReviews () {
-    console.log('reviewer1ListReviews()');
-    login = request('POST', baseUrl + apiLogin, {
-        json: {
-            email: users.r2.email,
-            password: users.r2.password
-        }
-    });
-    token = login.headers['x-auth-token'];
-    // console.log(token);
-    commonHeader = {
-        'x-auth-token': token,
-        'content-type': 'application/json'
-    };
-    // u1 apply job1
-    res = request('GET', baseUrl + reviewComboUrl, {
-        headers: commonHeader
-    });
-    console.log(JSON.stringify(JSON.parse(res.getBody('utf-8')),null,2));
-})();
+// (function reviewer1ListReviews () {
+//     console.log('reviewer1ListReviews()');
+//     login = request('POST', baseUrl + apiLogin, {
+//         json: {
+//             email: users.r1.email,
+//             password: users.r1.password
+//         }
+//     });
+//     token = login.headers['x-auth-token'];
+//     // console.log(token);
+//     commonHeader = {
+//         'x-auth-token': token,
+//         'content-type': 'application/json'
+//     };
+//     // u1 apply job1
+//     res = request('GET', baseUrl + reviewComboUrl, {
+//         headers: commonHeader
+//     });
+//     console.log(JSON.stringify(JSON.parse(res.getBody('utf-8')),null,2));
+// })();
+//
+//
+// (function reviewer2ListReviews () {
+//     console.log('reviewer1ListReviews()');
+//     login = request('POST', baseUrl + apiLogin, {
+//         json: {
+//             email: users.r2.email,
+//             password: users.r2.password
+//         }
+//     });
+//     token = login.headers['x-auth-token'];
+//     // console.log(token);
+//     commonHeader = {
+//         'x-auth-token': token,
+//         'content-type': 'application/json'
+//     };
+//     // u1 apply job1
+//     res = request('GET', baseUrl + reviewComboUrl, {
+//         headers: commonHeader
+//     });
+//     console.log(JSON.stringify(JSON.parse(res.getBody('utf-8')),null,2));
+// })();
 
 
 
