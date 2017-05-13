@@ -9,8 +9,6 @@ The main entry point is MainApplication.java
 Open browser and navigate to http://localhost:8080
 To log into the application, use the the ADMIN account (295046974@qq.com / 123). <br>
 
-Go to http://localhost:8080/#/about for more discussion
-
 Go to http://localhost:8080/swagger-ui.html for Swagger (API Ref)
 
 Navigate to http://localhost:8080/h2-console to look at the database content <br>
