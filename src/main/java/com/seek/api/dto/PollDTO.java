@@ -18,6 +18,6 @@ public class PollDTO {
 
     @Setter @Getter String title;
 
-    @Setter @Getter List<VoteDTO> votes;
+    @Setter @Getter List<String> pollOptions;
 
 }
