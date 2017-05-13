@@ -1,5 +1,6 @@
 package com.seek.api.controllers;
 
+import com.seek.api.config.FoundITConfig;
 import com.seek.api.dto.PollDTO;
 import com.seek.api.dto.ReviewDTO;
 import com.seek.api.model.*;
@@ -7,10 +8,14 @@ import com.seek.api.service.JobService;
 import com.seek.api.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -20,6 +25,9 @@ public class AdminController {
 
     private final UserService userService;
     private final JobService jobService;
+
+    @Autowired
+    private FoundITConfig foundITConfig;
 
     @Autowired
     public AdminController(UserService userService, JobService jobService) {
@@ -90,7 +98,6 @@ public class AdminController {
 
     @RequestMapping(value = "/poll", method = RequestMethod.POST)
     public ResponseEntity<?> organizePoll(@RequestBody PollDTO pollDTO) {
-        String pollLink = "";
         // step 1: update job status & app status.
         Job job = jobService.findJobByID(Long.parseLong(pollDTO.getJobID()));
         if (job != null) {
@@ -108,8 +115,18 @@ public class AdminController {
         }
 
         // step 2: send poll & retrieve poll link.
+        String pollURL = foundITConfig.getPollServiceURL();
+        System.out.println("req1:" + pollURL);
 
-        return new ResponseEntity<>(pollLink, HttpStatus.OK);
+//        MultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
+//        headers.add("Content-Type", "application/json");
+
+        RestTemplate restTemplate = new RestTemplate();
+//        HttpEntity<PollDTO> httpEntity = new HttpEntity(pollDTO, headers);
+        String result = restTemplate.postForObject(pollURL, pollDTO, String.class);
+        System.out.println("poll url" + result + " | req:" + pollURL);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 
