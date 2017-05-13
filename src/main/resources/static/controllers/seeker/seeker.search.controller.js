@@ -15,8 +15,10 @@ foundITApp.controller('seekerSearchCtrl', function ($scope, seekerService, toast
             seekerService.searchJobs($scope.data.keyWord).then(function success(jobList) {
                 console.log('search jobList', jobList);
                 $scope.data.jobList = [];
-                jobList.forEach(function (job) {
-                    $scope.data.jobList.push(job);
+                jobList.forEach(function (job) { // filter only OPENING JOB
+                    if(job.status === 'OPEN'){
+                        $scope.data.jobList.push(job);
+                    }
                 });
                 console.log('filtered jobList', $scope.data.jobList);
             }, function error(err) {

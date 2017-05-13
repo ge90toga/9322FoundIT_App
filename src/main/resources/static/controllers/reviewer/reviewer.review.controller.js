@@ -1,4 +1,4 @@
-foundITApp.controller('reviewerCtrl', function ($scope, toaster, reviewerService) {
+foundITApp.controller('reviewerCtrl', function ($scope, toaster, reviewerService, _) {
     $scope.init = function () {
         console.log('reviewerCtrl ctrl');
         $scope.data = {

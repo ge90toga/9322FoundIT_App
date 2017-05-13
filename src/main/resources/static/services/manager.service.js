@@ -82,14 +82,20 @@ foundITApp.service('managerService', function ($q, httpService) {
                         finaInvite = {
                             jobID: approvedJob.jobID,
                             jobTitle: approvedJob.jobTitle,
-                            applicants: [approvedJob.applicant]
+                            applicants: [approvedJob.applicant],
+                            applicationList: [approvedJob.applicationID]
                         };
                     } else {
                         finaInvite.applicants.push(approvedJob.applicant);
+                        finaInvite.applicationList.push(approvedJob.applicationID);
                     }
                 });
                 console.log('final list', finaInvite);
-                d.resolve(finaInvite);
+                if (finaInvite) {
+                    d.resolve(finaInvite);
+                } else {
+                    d.resolve({});
+                }
             }, function error(err) {
                 console.log('managerService::getJobApplyCombo Error', err);
                 d.reject(err);
