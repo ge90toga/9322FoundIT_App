@@ -4,6 +4,7 @@ package com.seek.api.commandline;
 import com.seek.api.dto.UserDTO;
 import com.seek.api.model.*;
 import com.seek.api.service.JobService;
+import com.seek.api.service.MailService;
 import com.seek.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -24,10 +25,14 @@ public class DataInitializer implements CommandLineRunner {
     @Autowired
     JobService jobService;
 
+    @Autowired
+    MailService mailService;
+
     @Override
     public void run(String... arg0) throws Exception {
 //        addUser();
 //        testJobs();
+//        mailService.sendMail("ruan.yuji@gmail.com", "hello", "123");
     }
 
     private void addUser() {

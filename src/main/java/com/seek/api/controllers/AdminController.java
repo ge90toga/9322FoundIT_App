@@ -5,15 +5,13 @@ import com.seek.api.dto.PollDTO;
 import com.seek.api.dto.ReviewDTO;
 import com.seek.api.model.*;
 import com.seek.api.service.JobService;
+import com.seek.api.service.MailService;
 import com.seek.api.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -25,6 +23,9 @@ public class AdminController {
 
     private final UserService userService;
     private final JobService jobService;
+
+    @Autowired
+    private MailService mailService;
 
     @Autowired
     private FoundITConfig foundITConfig;
@@ -125,6 +126,13 @@ public class AdminController {
 //        HttpEntity<PollDTO> httpEntity = new HttpEntity(pollDTO, headers);
         String result = restTemplate.postForObject(pollURL, pollDTO, String.class);
         System.out.println("poll url" + result + " | req:" + pollURL);
+
+        // send email.
+        if (foundITConfig.isMailService()) {
+            for (String username : pollDTO.getApplicantIDs()) {
+                mailService.sendMail(username, "Poll Invitation", result);
+            }
+        }
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

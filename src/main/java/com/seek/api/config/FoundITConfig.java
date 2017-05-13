@@ -16,4 +16,6 @@ public class FoundITConfig {
 
     @Setter @Getter private String pollServiceURL;
 
+    @Setter @Getter private boolean mailService;
+
 }
