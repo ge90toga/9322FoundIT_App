@@ -101,11 +101,11 @@
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 
-		<!--  Hot deploy 热部署  -->
+		<!--  Hot deploy  -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
-			<optional>true</optional> <!-- Dependency will not pass through 表示依赖不会传递 -->
+			<optional>true</optional> <!-- Dependency will not pass through -->
 		</dependency>
 
 	</dependencies>
@@ -116,7 +116,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<fork>true</fork> <!-- enable devtools 如果没有该配置，devtools不会生效 -->
+					<fork>true</fork> <!-- enable devtools -->
 				</configuration>
 			</plugin>
 		</plugins>
